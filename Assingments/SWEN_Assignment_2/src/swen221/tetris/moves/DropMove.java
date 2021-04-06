@@ -15,9 +15,24 @@ import swen221.tetris.tetromino.ActiveTetromino;
  *
  */
 public class DropMove implements Move {
+
+	ActiveTetromino tetromino;
+	int yTran = 0;
+
 	@Override
 	public boolean isValid(Board board) {
-		return true;
+		tetromino = board.getActiveTetromino();
+
+		while (tetromino.getBoundingBox().getMinY() >= 0) {
+			tetromino = tetromino.translate(0, -1);
+			if (!board.canPlaceTetromino(tetromino)) {
+				tetromino = tetromino.translate(0, +1);
+				return true;
+
+			}
+		}
+
+		return false;
 	}
 
 	@Override
@@ -25,13 +40,14 @@ public class DropMove implements Move {
 
 		board = new Board(board);
 
-		ActiveTetromino tetromino = board.getActiveTetromino().translate(0, -5);
+		ActiveTetromino a = board.getActiveTetromino();
 
-		if (tetromino.isWithin(board.getHeight(), board.getWidth())) {
-			board.setActiveTetromino(tetromino);
-		}
+		board.getActiveTetromino().translate(0, yTran);
+		board.placeTetromino(tetromino);
+		// board.setActiveTetromino(null);
 
 		return board;
+
 	}
 
 	@Override

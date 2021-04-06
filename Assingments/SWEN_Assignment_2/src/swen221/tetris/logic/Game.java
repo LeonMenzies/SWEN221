@@ -142,8 +142,18 @@ public class Game {
 		ActiveTetromino activeTetromino = board.getActiveTetromino();
 		// Check whether it has landed
 		if (activeTetromino != null) {
+
 			// apply gravity
 			activeTetromino = activeTetromino.translate(0, -1);
+
+			// If the new move is invalid undo and place
+			if (!board.canPlaceTetromino(activeTetromino)) {
+				activeTetromino = activeTetromino.translate(0, +1);
+				board.placeTetromino(activeTetromino);
+				board.setActiveTetromino(null);
+				return;
+			}
+
 		} else if (board.canPlaceTetromino(nextTetromino)) {
 			// promote next tetromino to be active
 			activeTetromino = nextTetromino;
@@ -153,12 +163,6 @@ public class Game {
 			// indicates game over status
 		}
 
-		// Check wether the cell is at the bottom
-		if (activeTetromino.getBoundingBox().getMinY() == 0 && activeTetromino != null) {
-			board.placeTetromino(activeTetromino);
-			board.setActiveTetromino(null);
-			return;
-		}
 		board.setActiveTetromino(activeTetromino);
 	}
 
