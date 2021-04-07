@@ -121,7 +121,7 @@ public class Game {
 	 */
 	public boolean apply(Move move) {
 		// Check whether the move was valid as, if not, then it's ignored.
-		if (move.isValid(board)) {
+		if (move.isValid(board) && board.getActiveTetromino() != null) {
 			// Yes, move is valid therefore apply it for real.
 			board = move.apply(board);
 			//
@@ -150,8 +150,8 @@ public class Game {
 			if (!board.canPlaceTetromino(activeTetromino)) {
 				activeTetromino = activeTetromino.translate(0, +1);
 				board.placeTetromino(activeTetromino);
-				board.setActiveTetromino(null);
-				return;
+				activeTetromino = null;
+
 			}
 
 		} else if (board.canPlaceTetromino(nextTetromino)) {

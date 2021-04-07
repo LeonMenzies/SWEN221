@@ -6,7 +6,6 @@ package swen221.tetris.moves;
 import swen221.tetris.logic.Board;
 import swen221.tetris.logic.Rectangle;
 import swen221.tetris.tetromino.ActiveTetromino;
-import swen221.tetris.tetromino.Tetromino;
 
 /**
  * Implements a translation move.
@@ -28,11 +27,12 @@ public abstract class AbstractTranslation extends AbstractMove implements Move {
 	/**
 	 * Construct new TranslationMove for a given amount of horizontal and vertical
 	 * translation.
+	 * 
+	 * HCeck weather the translation was valid and if not return the current state
+	 * of the board
 	 *
-	 * @param dx
-	 *            Amount to translate in horizontal direction.
-	 * @param dy
-	 *            Amount to translate in vertical direction.
+	 * @param dx Amount to translate in horizontal direction.
+	 * @param dy Amount to translate in vertical direction.
 	 */
 	public AbstractTranslation(int dx, int dy) {
 		this.dx = dx;
@@ -45,6 +45,12 @@ public abstract class AbstractTranslation extends AbstractMove implements Move {
 		board = new Board(board);
 		// Apply translation for this move
 		ActiveTetromino tetromino = board.getActiveTetromino().translate(dx, dy);
+		Rectangle bound = tetromino.getBoundingBox();
+
+		// Check the move is not out of bounds
+		if (bound.getMinX() < 0 || bound.getMaxX() > board.getWidth() || bound.getMinY() < 0) {
+			return board;
+		}
 		// Apply the move to the new board.
 		board.setActiveTetromino(tetromino);
 		// Return updated version of board

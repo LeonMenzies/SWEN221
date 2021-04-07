@@ -16,38 +16,34 @@ import swen221.tetris.tetromino.ActiveTetromino;
  */
 public class DropMove implements Move {
 
-	ActiveTetromino tetromino;
-	int yTran = 0;
-
 	@Override
 	public boolean isValid(Board board) {
-		tetromino = board.getActiveTetromino();
 
-		while (tetromino.getBoundingBox().getMinY() >= 0) {
-			tetromino = tetromino.translate(0, -1);
-			if (!board.canPlaceTetromino(tetromino)) {
-				tetromino = tetromino.translate(0, +1);
-				return true;
-
-			}
+		// Make sure there is an active tetromino to drop
+		if (board.getActiveTetromino() == null) {
+			return false;
 		}
 
-		return false;
+		return true;
 	}
 
 	@Override
 	public Board apply(Board board) {
-
+		// Create copy of the board to prevent modifying its previous state.
 		board = new Board(board);
+		// Create a copy of this board which will be updated.
+		ActiveTetromino tetromino = board.getActiveTetromino();
 
-		ActiveTetromino a = board.getActiveTetromino();
+		// Move the tetromino down until its not valid
+		while (board.canPlaceTetromino(tetromino)) {
+			tetromino = tetromino.translate(0, -1);
+		}
 
-		board.getActiveTetromino().translate(0, yTran);
-		board.placeTetromino(tetromino);
-		// board.setActiveTetromino(null);
-
+		// Move it up 1 so it is valid and set it
+		tetromino = tetromino.translate(0, +1);
+		board.setActiveTetromino(tetromino);
+		// Return updated version of this board.
 		return board;
-
 	}
 
 	@Override

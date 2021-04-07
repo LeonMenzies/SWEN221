@@ -5,7 +5,6 @@ package swen221.tetris.moves;
 
 import swen221.tetris.logic.Board;
 import swen221.tetris.tetromino.ActiveTetromino;
-import swen221.tetris.tetromino.Tetromino;
 
 /**
  * Implements a rotation move which is either clockwise or anti-clockwise.
@@ -22,6 +21,11 @@ public class ClockwiseRotation extends AbstractMove implements Move {
 		board = new Board(board);
 		// Create a copy of this board which will be updated.
 		ActiveTetromino tetromino = board.getActiveTetromino().rotate(1);
+
+		// Make sure the roation is valid
+		if (!board.canPlaceTetromino(tetromino)) {
+			return board;
+		}
 		// Apply the move to the new board, rather than to this board.
 		board.setActiveTetromino(tetromino);
 		// Return updated version of this board.
