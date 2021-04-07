@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 import swen221.tetris.tetromino.ActiveTetromino;
-import swen221.tetris.tetromino.O_Tetromino;
 import swen221.tetris.tetromino.Tetromino;
 
 /**
@@ -83,6 +82,45 @@ public class Board {
 	 */
 	public ActiveTetromino getActiveTetromino() {
 		return activeTetromino;
+	}
+
+	/**
+	 * Check if any rows can be removed, remove if so
+	 * 
+	 */
+	public void checkRemoveRow() {
+
+		// starting from the top moving down
+		for (int y = height - 1; y >= 0; y--) {
+			for (int x = width - 1; x >= 0; x--) {
+
+				Tetromino tetromino = getTetrominoAt(x, y);
+
+				// Row is not complete
+				if (tetromino == null) {
+					break;
+				}
+
+				// If x gets to the width the row must be removed
+				if (x == 0) {
+
+					// if its the top row just insert null
+					if (y == height) {
+						for (int j = 0; j < width; j++) {
+							cells[(y * width) + j] = null;
+						}
+					} else {
+						// move the row above down to this row
+						for (int i = y * width; i < (width * height) - width; i++) {
+							cells[i] = cells[i + width];
+						}
+					}
+
+				}
+
+			}
+
+		}
 	}
 
 	/**
@@ -176,7 +214,6 @@ public class Board {
 		}
 		return true;
 	}
-
 
 	/**
 	 * Place a given Tetromino on the board by filling out each square it contains

@@ -152,6 +152,8 @@ public class Game {
 				board.placeTetromino(activeTetromino);
 				activeTetromino = null;
 
+				// Check if rows can be removed
+				board.checkRemoveRow();
 			}
 
 		} else if (board.canPlaceTetromino(nextTetromino)) {

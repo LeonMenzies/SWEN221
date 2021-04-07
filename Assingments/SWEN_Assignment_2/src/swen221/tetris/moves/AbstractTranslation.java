@@ -48,7 +48,8 @@ public abstract class AbstractTranslation extends AbstractMove implements Move {
 		Rectangle bound = tetromino.getBoundingBox();
 
 		// Check the move is not out of bounds
-		if (bound.getMinX() < 0 || bound.getMaxX() > board.getWidth() || bound.getMinY() < 0) {
+		if (bound.getMinX() < 0 || bound.getMaxX() > board.getWidth() - 1 || bound.getMinY() < 0
+				|| !board.canPlaceTetromino(tetromino)) {
 			return board;
 		}
 		// Apply the move to the new board.

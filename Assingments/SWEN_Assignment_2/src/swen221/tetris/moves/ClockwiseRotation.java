@@ -22,8 +22,8 @@ public class ClockwiseRotation extends AbstractMove implements Move {
 		// Create a copy of this board which will be updated.
 		ActiveTetromino tetromino = board.getActiveTetromino().rotate(1);
 
-		// Make sure the roation is valid
-		if (!board.canPlaceTetromino(tetromino)) {
+		// Make sure the rotation is valid
+		if (!board.canPlaceTetromino(tetromino) || tetromino.getBoundingBox().getMinX() < 0) {
 			return board;
 		}
 		// Apply the move to the new board, rather than to this board.
