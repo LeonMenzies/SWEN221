@@ -88,7 +88,9 @@ public class Board {
 	 * Check if any rows can be removed, remove if so
 	 * 
 	 */
-	public void checkRemoveRow() {
+	public int checkRemoveRow() {
+
+		int toReturn = 0;
 
 		// starting from the top moving down
 		for (int y = height - 1; y >= 0; y--) {
@@ -103,9 +105,10 @@ public class Board {
 
 				// If x gets to the width the row must be removed
 				if (x == 0) {
+					toReturn++;
 
 					// if its the top row just insert null
-					if (y == height) {
+					if (y == height - 1) {
 						for (int j = 0; j < width; j++) {
 							cells[(y * width) + j] = null;
 						}
@@ -115,12 +118,10 @@ public class Board {
 							cells[i] = cells[i + width];
 						}
 					}
-
 				}
-
 			}
-
 		}
+		return toReturn;
 	}
 
 	/**

@@ -3,18 +3,44 @@
 // You may not distribute it in any other way without permission.
 package swen221.tetris.gui;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.util.List;
-import java.util.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.Iterator;
+import java.util.Random;
 
-import javax.swing.*;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import swen221.tetris.logic.Game;
-import swen221.tetris.moves.*;
-import swen221.tetris.tetromino.*;
+import swen221.tetris.moves.ClockwiseRotation;
+import swen221.tetris.moves.DropMove;
+import swen221.tetris.moves.MoveDown;
+import swen221.tetris.moves.MoveLeft;
+import swen221.tetris.moves.MoveRight;
+import swen221.tetris.tetromino.I_Tetromino;
+import swen221.tetris.tetromino.J_Tetromino;
+import swen221.tetris.tetromino.L_Tetromino;
+import swen221.tetris.tetromino.O_Tetromino;
+import swen221.tetris.tetromino.S_Tetromino;
+import swen221.tetris.tetromino.T_Tetromino;
+import swen221.tetris.tetromino.Tetromino;
+import swen221.tetris.tetromino.Z_Tetromino;
 
 /**
  * Tetris Define a Gui allowing to play. This code is quite advanced and uses
@@ -51,7 +77,7 @@ public class Tetris extends JFrame {
 			display.revalidate();
 			next.revalidate();
 			// Construct the "clock"
-			ClockThread clock = new ClockThread(game,frame,display,next);
+			ClockThread clock = new ClockThread(game, frame, display, next);
 			// Start the clock
 			clock.start();
 		});
@@ -73,10 +99,10 @@ public class Tetris extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				// NOTE: Multiple threads invoke on the game (Clock Thread and
-				// AWT Threads).  Hence, need to synchronise here.
-				synchronized(g) {
+				// AWT Threads). Hence, need to synchronise here.
+				synchronized (g) {
 					// Check whether active tetromino exists which we can control
-					if(g.getActiveBoard().getActiveTetromino() != null) {
+					if (g.getActiveBoard().getActiveTetromino() != null) {
 						switch (e.getKeyCode()) {
 						case KeyEvent.VK_UP:
 							g.apply(new ClockwiseRotation());
@@ -109,38 +135,27 @@ public class Tetris extends JFrame {
 		// Set padding to make it look nicer
 		panel.setBorder(new EmptyBorder(20, 20, 20, 20));
 		// Create score information
-		Component[] bits = {
-				nextTetrominoPanel,
-				Box.createVerticalGlue(),
-				new JLabel("Score"),
-				new JLabel() {
-					@Override
-					public String getText() {
-						return String.format("%04d", g.getScore());
-					}
-				},
-				Box.createVerticalGlue(),
-				new JLabel("Level"),
-				new JLabel() {
-					@Override
-					public String getText() {
-						return String.format("%04d", g.getLines()/10);
-					}
-				},
-				Box.createVerticalGlue(),
-				new JLabel("Lines"),
-				new JLabel() {
-					@Override
-					public String getText() {
-						return String.format("%04d", g.getLines());
-					}
-				},
-		};
+		Component[] bits = { nextTetrominoPanel, Box.createVerticalGlue(), new JLabel("Score"), new JLabel() {
+			@Override
+			public String getText() {
+				return String.format("%04d", g.getScore());
+			}
+		}, Box.createVerticalGlue(), new JLabel("Level"), new JLabel() {
+			@Override
+			public String getText() {
+				return String.format("%04d", g.getLines() / 10);
+			}
+		}, Box.createVerticalGlue(), new JLabel("Lines"), new JLabel() {
+			@Override
+			public String getText() {
+				return String.format("%04d", g.getLines());
+			}
+		}, };
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		//
-		for(Component c : bits) {
+		for (Component c : bits) {
 			panel.add(c);
-			if(c instanceof JLabel) {
+			if (c instanceof JLabel) {
 				JLabel l = (JLabel) c;
 				// center labels
 				l.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -158,7 +173,7 @@ public class Tetris extends JFrame {
 		// Create the display itself
 		JPanel display = new JPanel();
 		// Add border
-		display.setBorder(new LineBorder(Color.BLACK,5));
+		display.setBorder(new LineBorder(Color.BLACK, 5));
 		//
 		display.setLayout(new GridLayout(4, 5, 1, 1));
 		for (int row = 2; row >= -1; row -= 1) {
@@ -181,9 +196,10 @@ public class Tetris extends JFrame {
 			{
 				this.setLayout(null);
 			}
+
 			@Override
 			public void validate() {
-				synchronized(g) {
+				synchronized (g) {
 					Tetromino t = g.getActiveBoard().getTetrominoAt(col, row);
 					this.setBackground(toAwtColor(t));
 					super.validate();
@@ -206,9 +222,10 @@ public class Tetris extends JFrame {
 			{
 				this.setLayout(null);
 			}
+
 			@Override
 			public void validate() {
-				synchronized(g) {
+				synchronized (g) {
 					Tetromino t = g.getNextTetromino();
 					Color c = t.isWithin(col, row) ? toAwtColor(t) : Color.white;
 					this.setBackground(c);
@@ -318,8 +335,8 @@ public class Tetris extends JFrame {
 					boolean gameOver = false;
 					int lines;
 					// NOTE: multiple threads invoke on the game (Clock Thread and
-					// AWT Threads).  Hence, need to synchronise here.
-					synchronized(game) {
+					// AWT Threads). Hence, need to synchronise here.
+					synchronized (game) {
 						// apply gravity, etc.
 						game.clock();
 						// check whether reached game over state
@@ -329,13 +346,13 @@ public class Tetris extends JFrame {
 					}
 					// NOTE: cannot invoke gameOver() inside synchronised block as this can cause a
 					// deadlock with an AWT thread.
-					if(gameOver) {
+					if (gameOver) {
 						gameOver();
 					} else {
 						this.delayMillis = calculateDelayMillis(lines);
 					}
 					// update the display
-					for(JPanel p : panels) {
+					for (JPanel p : panels) {
 						p.revalidate();
 					}
 					frame.repaint();
@@ -352,10 +369,10 @@ public class Tetris extends JFrame {
 		private void gameOver() {
 			int choice = JOptionPane.showConfirmDialog(null, "GameOver! Would you play again?", "Select an option...",
 					JOptionPane.YES_NO_OPTION);
-			if(choice == 0) {
+			if (choice == 0) {
 				// NOTE: Multiple threads invoke on the game (Clock Thread and
-				// AWT Threads).  Hence, need to synchronise here.
-				synchronized(game) {
+				// AWT Threads). Hence, need to synchronise here.
+				synchronized (game) {
 					game.reset();
 				}
 			} else {

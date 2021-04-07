@@ -153,7 +153,11 @@ public class Game {
 				activeTetromino = null;
 
 				// Check if rows can be removed
-				board.checkRemoveRow();
+				int lineUpdate = board.checkRemoveRow();
+
+				lines += lineUpdate;
+				score += lineUpdate * 100;
+
 			}
 
 		} else if (board.canPlaceTetromino(nextTetromino)) {
