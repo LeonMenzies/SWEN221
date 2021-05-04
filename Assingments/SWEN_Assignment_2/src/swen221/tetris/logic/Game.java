@@ -155,6 +155,7 @@ public class Game {
 				// Check if rows can be removed
 				int lineUpdate = board.checkRemoveRow();
 
+				// Change the score accordingly
 				lines += lineUpdate;
 				score += lineUpdate * 100;
 

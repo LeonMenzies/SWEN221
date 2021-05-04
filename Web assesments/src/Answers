@@ -1,0 +1,200 @@
+public Time24 add1Hour() {
+
+		if (hours == 23) {
+			return new Time24(seconds, minutes, 0);
+
+		} else {
+			return new Time24(seconds, minutes, hours + 1);
+		}
+
+	}
+
+	public Time24 remove1Hour() {
+
+		if (hours == 0) {
+			return new Time24(seconds, minutes, 23);
+
+		} else {
+			return new Time24(seconds, minutes, hours - 1);
+		}
+
+	}
+
+	public Time24 add1Minute() {
+
+		if (minutes == 59) {
+
+			if (hours == 23) {
+				return new Time24(seconds, 0, 0);
+
+			} else {
+				return new Time24(seconds, 0, hours + 1);
+			}
+
+		} else {
+			return new Time24(seconds, minutes + 1, hours);
+		}
+
+	}
+
+	public Time24 remove1Minute() {
+
+		if (minutes == 0) {
+			if (hours == 0) {
+				return new Time24(seconds, 59, 23);
+
+			} else {
+				return new Time24(seconds, 59, hours - 1);
+			}
+
+		} else {
+			return new Time24(seconds, minutes - 1, hours);
+		}
+
+	}
+
+	public Time24 add1Second() {
+
+		if (seconds == 59) {
+			if (minutes == 59) {
+				if (hours == 23) {
+					return new Time24(0, 0, 0);
+				} else {
+					return new Time24(seconds, 0, hours + 1);
+				}
+			} else {
+				return new Time24(0, minutes + 1, hours);
+
+			}
+
+		} else {
+			return new Time24(seconds + 1, minutes, hours);
+		}
+
+	}
+
+	public Time24 remove1Second() {
+
+		if (seconds == 0) {
+			if (minutes == 0) {
+				if (hours == 0) {
+					return new Time24(59, 59, 23);
+
+				} else {
+					return new Time24(seconds, 59, hours - 1);
+				}
+
+			} else {
+				return new Time24(59, minutes - 1, hours);
+			}
+
+		} else {
+			return new Time24(seconds - 1, minutes, hours);
+		}
+
+	}
+	
+	
+	
+	
+	
+	####################################
+	
+	
+	
+	
+	public Time12 add1Hour() {
+
+		if (hours == 12) {
+			return new Time12(seconds, minutes, 1, !isPm);
+
+		} else {
+			return new Time12(seconds, minutes, hours + 1, isPm);
+		}
+
+	}
+
+	public Time12 remove1Hour() {
+
+		if (hours == 1) {
+			return new Time12(seconds, minutes, 12, !isPm);
+
+		} else {
+			return new Time12(seconds, minutes, hours - 1, isPm);
+		}
+
+	}
+
+	public Time12 add1Minute() {
+
+		if (minutes == 59) {
+
+			if (hours == 12) {
+				return new Time12(seconds, 0, 1, !isPm);
+
+			} else {
+				return new Time12(seconds, 0, hours + 1, isPm);
+			}
+
+		} else {
+			return new Time12(seconds, minutes + 1, hours, isPm);
+		}
+
+	}
+
+	public Time12 remove1Minute() {
+
+		if (minutes == 0) {
+			if (hours == 1) {
+				return new Time12(seconds, 59, 12, !isPm);
+
+			} else {
+				return new Time12(seconds, 59, hours - 1, isPm);
+			}
+
+		} else {
+			return new Time12(seconds, minutes - 1, hours, isPm);
+		}
+
+	}
+
+	public Time12 add1Second() {
+
+		if (seconds == 59) {
+			if (minutes == 59) {
+				if (hours == 12) {
+					return new Time12(0, 0, 1, !isPm);
+				} else {
+					return new Time12(0, 0, hours + 1, isPm);
+				}
+			} else {
+				return new Time12(0, minutes + 1, hours, isPm);
+
+			}
+
+		} else {
+			return new Time12(seconds + 1, minutes, hours, isPm);
+		}
+
+	}
+
+	public Time12 remove1Second() {
+
+		if (seconds == 0) {
+			if (minutes == 0) {
+				if (hours == 1) {
+					return new Time12(59, 59, 12, !isPm);
+
+				} else {
+					return new Time12(59, 59, hours - 1, isPm);
+				}
+
+			} else {
+				return new Time12(59, minutes - 1, hours, isPm);
+			}
+
+		} else {
+			return new Time12(seconds - 1, minutes, hours, isPm);
+		}
+
+	}

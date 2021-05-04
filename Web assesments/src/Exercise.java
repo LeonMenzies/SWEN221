@@ -1,46 +1,29 @@
-// The answer must have balanced parentheses
-// This is an example of "double dispatch"
+//The answer must have balanced parentheses
+class ArrayUtil {
+	String opening = "[";
+	String closing = "]";
+	String separator = ", ";
 
-interface Animal {
-	public boolean eats(Animal o);
-
-	public boolean isEatenBy(Animal o);
-}
-
-class Cat implements Animal {
-	public boolean eats(Animal o) {
-		return o.isEatenBy(this);
-	}
-
-	public boolean isEatenBy(Animal o) {
-		if (o.equals(this)) {
-			return false;
-		} else {
-			return true;
+	public final String format(Object[] array) {
+		String result = opening;
+		if (array.length == 0)
+			return result + closing;
+		for (int i = 0; i < array.length - 1; i++) {
+			result += array[i] + separator;
 		}
-	}
-}
-
-class Dog implements Animal {
-	public boolean eats(Animal o) {
-		return o.isEatenBy(this);
-	}
-
-	public boolean isEatenBy(Animal o) {
-		if (o.equals(this)) {
-			return false;
-		} else {
-			return true;
-		}
+		return result + array[array.length - 1] + closing;
 	}
 }
 
 public class Exercise {
-	public static void main(String[] args) {
-		Animal a = new Dog();
-		Animal b = new Cat();
-
-		assert a.eats(b);
-		assert !b.eats(b);
+	public static void main(String[] arg) {
+		ArrayUtil u = (new ArrayUtil() {
+			{
+				separator = "; ";
+			}
+		});
+		assert "[1; 2; 3]".equals(u.format(new Integer[] { 1, 2, 3 }));
+		assert "[4; 5; 6]".equals(u.format(new Integer[] { 4, 5, 6 }));
+		assert "[7; 8; 9]".equals(u.format(new Integer[] { 7, 8, 9 }));
 	}
 }

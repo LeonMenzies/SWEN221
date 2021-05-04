@@ -85,8 +85,9 @@ public class Board {
 	}
 
 	/**
-	 * Check if any rows can be removed, remove if so
+	 * @return - The amount of rows removed for the scoring system
 	 * 
+	 *         Check if any rows can be removed, if so remove them
 	 */
 	public int checkRemoveRow() {
 
