@@ -1,6 +1,7 @@
 package swen221.chessview.pieces;
 
-import swen221.chessview.*;
+import swen221.chessview.Board;
+import swen221.chessview.Position;
 
 public class Pawn extends PieceImpl implements Piece {
 	private boolean wasDoubleStep; // remember whether took double step or not.

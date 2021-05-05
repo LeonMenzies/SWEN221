@@ -1,7 +1,8 @@
 package swen221.chessview.moves;
 
-import swen221.chessview.*;
-import swen221.chessview.pieces.*;
+import swen221.chessview.Board;
+import swen221.chessview.pieces.Pawn;
+import swen221.chessview.pieces.Piece;
 
 /**
  * This represents a "check move". Note that, a check move can only be made up
@@ -15,6 +16,7 @@ public class PawnPromotion implements MultiPieceMove {
 	private SinglePieceMove move;
 
 	public PawnPromotion(SinglePieceMove move, Piece promotion) {
+		this.move = move;
 		this.promotion = promotion;
 	}
 
@@ -26,7 +28,8 @@ public class PawnPromotion implements MultiPieceMove {
 	@Override
 	public boolean isValid(Board board) {
 		int row = isWhite() ? 8 : 1;
-		return move.isValid(board) && move.piece() instanceof Pawn
+		return move.isValid(board) 
+				&& move.piece() instanceof Pawn
 				&& move.newPosition.row() == row;
 	}
 
@@ -34,7 +37,7 @@ public class PawnPromotion implements MultiPieceMove {
 	public void apply(Board board) {
 		Piece piece = board.pieceAt(move.oldPosition());
 		move.apply(board);
-		board.setPieceAt(move.newPosition(), piece);
+		board.setPieceAt(move.newPosition(), promotion);
 	}
 
 	@Override
