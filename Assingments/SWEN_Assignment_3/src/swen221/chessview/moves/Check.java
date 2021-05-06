@@ -1,7 +1,6 @@
 package swen221.chessview.moves;
 
-import swen221.chessview.*;
-import swen221.chessview.pieces.*;
+import swen221.chessview.Board;
 
 /**
  * This represents a "check move". Note that, a check move can only be made up
@@ -34,7 +33,7 @@ public class Check implements Move {
 
 			// First, copy board and apply underlying move.
 			board = new Board(board);
-			board.apply(move);
+			board.apply(move());
 
 			// Second, check opposition is now in check.
 			return board.isInCheck(!isWhite());

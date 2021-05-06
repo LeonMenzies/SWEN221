@@ -1,6 +1,7 @@
 package swen221.chessview.pieces;
 
-import swen221.chessview.*;
+import swen221.chessview.Board;
+import swen221.chessview.Position;
 
 public class Bishop extends PieceImpl implements Piece {
 	public Bishop(boolean isWhite) {
@@ -13,7 +14,8 @@ public class Bishop extends PieceImpl implements Piece {
 		Piece p = board.pieceAt(oldPosition);
 		Piece t = board.pieceAt(newPosition);
 		return this.equals(p)
-				&& (t == isTaken || (isTaken != null && isTaken.equals(t)))
+				&& (t == isTaken || (isTaken != null 
+				&& isTaken.equals(t)))
 				&& board.clearDiaganolExcept(oldPosition, newPosition, p, t);
 	}
 

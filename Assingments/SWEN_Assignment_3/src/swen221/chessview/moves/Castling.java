@@ -45,7 +45,9 @@ public class Castling implements MultiPieceMove {
 		Piece king = board.pieceAt(kpos);
 		Piece rook = board.pieceAt(rpos);
 
-		return king != null && rook != null && king.equals(new King(isWhite))
+		return king != null 
+				&& rook != null 
+				&& king.equals(new King(isWhite))
 				&& rook.equals(new Rook(isWhite))
 				&& board.clearRowExcept(kpos, rpos, king, rook)
 				&& !board.kingMoved(isWhite)

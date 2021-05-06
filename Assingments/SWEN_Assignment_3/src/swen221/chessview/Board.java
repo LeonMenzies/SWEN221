@@ -133,9 +133,9 @@ public class Board {
 
 	public boolean kingMoved(boolean isWhite) {
 		if(isWhite) {
-			return blackKingMoved;
-		} else {
 			return whiteKingMoved;
+		} else {
+			return blackKingMoved;
 		}
 	}
 
@@ -148,9 +148,9 @@ public class Board {
 			}
 		} else {
 			if(kingSide) {
-				whiteKingSideRookMoved = false;
+				blackKingSideRookMoved = true;
 			} else {
-				whiteQueenSideRookMoved = false;
+				blackQueenSideRookMoved = true;
 			}
 		}
 	}
@@ -164,9 +164,9 @@ public class Board {
 			}
 		} else {
 			if(kingSide) {
-				return !whiteKingSideRookMoved;
+				return blackKingSideRookMoved;
 			} else {
-				return !whiteQueenSideRookMoved;
+				return blackQueenSideRookMoved;
 			}
 		}
 	}

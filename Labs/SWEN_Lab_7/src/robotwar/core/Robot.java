@@ -3,6 +3,7 @@
 // You may not distribute it in any other way without permission.
 package robotwar.core;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import robotwar.actions.Move;
@@ -44,12 +45,14 @@ public interface Robot {
 
 		/**
 		 * Get the width of the arena.
+		 * 
 		 * @return
 		 */
 		public int getWidth();
 
 		/**
 		 * Get the height of the arena.
+		 * 
 		 * @return
 		 */
 		public int getHeight();
@@ -63,6 +66,7 @@ public interface Robot {
 
 		/**
 		 * Get the shooting range of this robot.
+		 * 
 		 * @return
 		 */
 		public int getRange();
@@ -85,13 +89,13 @@ public interface Robot {
 		/**
 		 * Fire at a given position on the board.
 		 *
-		 * @param target
-		 *            --- Position to fire at.
+		 * @param target --- Position to fire at.
 		 */
 		public void fire(Position target);
 
 		/**
 		 * Move in a given direction on the board.
+		 * 
 		 * @param direction
 		 */
 		public void move(Position.Direction direction);
@@ -155,6 +159,7 @@ public interface Robot {
 
 		/**
 		 * Get the width of the arena.
+		 * 
 		 * @return
 		 */
 		@Override
@@ -164,10 +169,11 @@ public interface Robot {
 
 		/**
 		 * Get the height of the arena.
+		 * 
 		 * @return
 		 */
 		@Override
-		public int getHeight()  {
+		public int getHeight() {
 			return battle.getHeight();
 		}
 
@@ -183,6 +189,7 @@ public interface Robot {
 
 		/**
 		 * Get the robot controller associated with this state.
+		 * 
 		 * @return
 		 */
 		public Robot.Controller getController() {
@@ -196,11 +203,12 @@ public interface Robot {
 		 */
 		@Override
 		public Position getPosition() {
-			return position;
+			return new Position(position.x, position.y);
 		}
 
 		/**
 		 * Get the current strength of the robot.
+		 * 
 		 * @return
 		 */
 		public int getStrength() {
@@ -209,6 +217,7 @@ public interface Robot {
 
 		/**
 		 * Get the current range of this robot.
+		 * 
 		 * @return
 		 */
 		@Override
@@ -220,9 +229,9 @@ public interface Robot {
 		 * Allow the robot behind this state to take a turn and register some actions.
 		 */
 		public void takeTurn() {
-			if(strength > 0) {
+			if (strength > 0) {
 				// If we have some strength then regenerate by 1 every round.
-				strength = Math.min(strength + 1,maxStrength);
+				strength = Math.min(strength + 1, maxStrength);
 				// Only take a turn if has some strength.
 				robot.takeTurn(this);
 			}
@@ -236,31 +245,21 @@ public interface Robot {
 		 * @return
 		 */
 		@Override
-		public List<View> getRobots() {
-			// NOTE: this line is a bit dodgy :)
-//			List<View> toReturn = new ArrayList<>();
-//			
-//			for(int x = 0; x < battle.getWidth(); x++) {
-//				for(int y = 0; y < battle.getHeight(); y++) {
-//					if(battle.getRobotState(x, y) != null) {
-//						
-//
-//						toReturn.add(battle.getRobotState(x, y));
-//					}
-//				}
-//				
-//			}
-//			return toReturn;
-			
-//			List<Robot.View> s = (List) battle.getStates();
-//			return s;
-			
-			
-			return (List) battle.getStates();
+		public List<Robot.View> getRobots() {
+			List<Robot.View> toReturn = new ArrayList<>();
+			for(State v : battle.getStates()) {
+				State s = new State(v.battle, v.robot, v.range, v.position, v.strength);
+				
+				toReturn.add(s);
+				
+			}
+			return toReturn;
+
 		}
 
 		/**
 		 * Set the current position of this robot
+		 * 
 		 * @param p
 		 */
 		public void setPosition(Position p) {
@@ -269,25 +268,25 @@ public interface Robot {
 
 		/**
 		 * Set the current strength of this robot
+		 * 
 		 * @param p
 		 */
 		public void setStrength(int strength) {
-			
+
 			this.strength = strength;
 		}
 
 		@Override
 		public void fire(Position target) {
-			if(strength > 0) {
+			if (strength > 0) {
 				// Can only fire if enough strength
-				battle.getActions().add(new Shoot(this,target));
+				battle.getActions().add(new Shoot(this, target));
 			}
 		}
 
-
 		@Override
 		public void move(Position.Direction direction) {
-			battle.getActions().add(new Move(this,direction));
+			battle.getActions().add(new Move(this, direction));
 		}
 	}
 }

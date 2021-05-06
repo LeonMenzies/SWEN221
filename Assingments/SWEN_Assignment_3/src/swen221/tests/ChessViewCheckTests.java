@@ -1,4 +1,5 @@
-package swen221.piece.tests;
+package swen221.tests;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -10,66 +11,86 @@ import org.junit.Test;
 import swen221.chessview.Board;
 import swen221.chessview.ChessGame;
 
-	public class ChessViewBishopTests {
+	public class ChessViewCheckTests {
 
 		// ================================================
 		// Valid Tests
 		// ================================================
 
 		
-		//Bishop white and black moves
-		@Test public void bishop_valid_1() {
+		//white gets black in check
+		@Test public void white_check_1() {
 			String input =
-					"e2-e3 d7-d6\n" +
-					"Bf1-c4 Bc8-e6\n" +
-					"Bc4xBe6\n" +
+					"c2-c3 d7-d6\n" +
+					"Qd1-a4+\n" +
 					"";
 			
 			String output =
-				"8|r|n|_|q|k|b|n|r|\n" +
+				"8|r|n|b|q|k|b|n|r|\n" +
 				"7|p|p|p|_|p|p|p|p|\n" +
-				"6|_|_|_|p|B|_|_|_|\n" +
+				"6|_|_|_|p|_|_|_|_|\n" +
 				"5|_|_|_|_|_|_|_|_|\n" +
-				"4|_|_|_|_|_|_|_|_|\n" +
-				"3|_|_|_|_|P|_|_|_|\n" +
-				"2|P|P|P|P|_|P|P|P|\n" +
-				"1|R|N|B|Q|K|_|N|R|\n" +
+				"4|Q|_|_|_|_|_|_|_|\n" +
+				"3|_|_|P|_|_|_|_|_|\n" +
+				"2|P|P|_|P|P|P|P|P|\n" +
+				"1|R|N|B|_|K|B|N|R|\n" +
+				"  a b c d e f g h";
+
+			check(input,output);
+		}
+		
+		//black gets black in check
+		@Test public void black_check_1() {
+			String input =
+					"f2-f3 e7-e6\n" +
+					"f3-f4 Qd8-h4+\n" +
+					"";
+			
+			String output =
+				"8|r|n|b|_|k|b|n|r|\n" +
+				"7|p|p|p|p|_|p|p|p|\n" +
+				"6|_|_|_|_|p|_|_|_|\n" +
+				"5|_|_|_|_|_|_|_|_|\n" +
+				"4|_|_|_|_|_|P|_|q|\n" +
+				"3|_|_|_|_|_|_|_|_|\n" +
+				"2|P|P|P|P|P|_|P|P|\n" +
+				"1|R|N|B|Q|K|B|N|R|\n" +
 				"  a b c d e f g h";
 
 			check(input,output);
 		}
 		
 		
-	
 
 		// ================================================
 		// Invalid Tests
 		// ================================================
 
-		//Bishop cant move sideways
-		@Test public void bishop_invalid_1() {
+		//False check
+		@Test public void invalid_check_1() {
 			String input =
-					"Bf1-e1\n" +
+					"c2-c3 f7-f6\n" +
+					"Qd1-a4+\n" +
 					"";
 			
 			String output =
-					"8|r|n|b|q|k|b|n|r|\n" +
-					"7|p|p|p|p|p|p|p|p|\n" +
-					"6|_|_|_|_|_|_|_|_|\n" +
-					"5|_|_|_|_|_|_|_|_|\n" +
-					"4|_|_|_|_|_|_|_|_|\n" +
-					"3|_|_|_|_|_|_|_|_|\n" +
-					"2|P|P|P|P|P|P|P|P|\n" +
-					"1|R|N|B|Q|K|B|N|R|\n" +
-					"  a b c d e f g h";
+				"8|r|n|b|q|k|b|n|r|\n" +
+				"7|p|p|p|p|p|_|p|p|\n" +
+				"6|_|_|_|_|_|p|_|_|\n" +
+				"5|_|_|_|_|_|_|_|_|\n" +
+				"4|_|_|_|_|_|_|_|_|\n" +
+				"3|_|_|P|_|_|_|_|_|\n" +
+				"2|P|P|_|P|P|P|P|P|\n" +
+				"1|R|N|B|Q|K|B|N|R|\n" +
+				"  a b c d e f g h";
 
 			check(input,output);
 		}
 		
-		//Bishop no move
-		@Test public void bishop_invalid_2() {
+		//Invalid move
+		@Test public void invalid_check_2() {
 			String input =
-					"Bf1-f1\n" +
+					"Qd1-a4+\n" +
 					"";
 			
 			String output =
@@ -87,6 +108,8 @@ import swen221.chessview.ChessGame;
 		}
 				
 		
+		
+	
 
 
 

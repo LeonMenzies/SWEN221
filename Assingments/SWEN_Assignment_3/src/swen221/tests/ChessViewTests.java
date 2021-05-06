@@ -401,12 +401,7 @@ public class ChessViewTests {
 		check(input,output);
 	}
 	
-	
 
-	
-	
-	
-	
 
 
 

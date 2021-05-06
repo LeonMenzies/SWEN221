@@ -80,7 +80,7 @@ public class ChessGame {
 		Board b = new Board();
 		boards.add(b);
 		boolean lastTime = false;
-		for(Round r : rounds) {
+		for(Round r : rounds()) {
 			if (lastTime) { return boards; }
 			b = new Board(b);
 			if(!b.apply(r.white())) { return boards; }

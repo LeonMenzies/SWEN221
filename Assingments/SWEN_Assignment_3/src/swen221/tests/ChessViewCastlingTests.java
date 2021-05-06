@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import swen221.chessview.Board;
 import swen221.chessview.ChessGame;
+import swen221.chessview.moves.Castling;
 
 	public class ChessViewCastlingTests {
 
@@ -109,7 +110,7 @@ import swen221.chessview.ChessGame;
 				"4|_|_|_|_|_|R|_|P|\n" +
 				"3|N|_|_|_|_|_|_|_|\n" +
 				"2|P|P|P|P|P|P|P|_|\n" +
-				"1|R|N|B|Q|K|B|K|_|\n" +
+				"1|R|_|B|Q|K|B|N|_|\n" +
 				"  a b c d e f g h";
 
 			check(input,output);
@@ -122,8 +123,239 @@ import swen221.chessview.ChessGame;
 		// ================================================
 
 		
+		//Invalid king side castle
+		@Test public void invalid_castling_move_1() {
+			String input =
+					"O-O\n" +
+					"";
+			
+			String output =
+			"8|r|n|b|q|k|b|n|r|\n" +
+			"7|p|p|p|p|p|p|p|p|\n" +
+			"6|_|_|_|_|_|_|_|_|\n" +
+			"5|_|_|_|_|_|_|_|_|\n" +
+			"4|_|_|_|_|_|_|_|_|\n" +
+			"3|_|_|_|_|_|_|_|_|\n" +
+			"2|P|P|P|P|P|P|P|P|\n" +
+			"1|R|N|B|Q|K|B|N|R|\n" +
+			"  a b c d e f g h";
+			check(input,output);
+		}
 		
-
+		//Invalid queen side castle
+		@Test public void invalid_castling_move_2() {
+			String input =
+					"O-O-O\n" +
+					"";
+			
+			String output =
+			"8|r|n|b|q|k|b|n|r|\n" +
+			"7|p|p|p|p|p|p|p|p|\n" +
+			"6|_|_|_|_|_|_|_|_|\n" +
+			"5|_|_|_|_|_|_|_|_|\n" +
+			"4|_|_|_|_|_|_|_|_|\n" +
+			"3|_|_|_|_|_|_|_|_|\n" +
+			"2|P|P|P|P|P|P|P|P|\n" +
+			"1|R|N|B|Q|K|B|N|R|\n" +
+			"  a b c d e f g h";
+			check(input,output);
+		}
+		
+		//Invalid king side castle black
+		@Test public void invalid_castling_move_3() {
+			String input =
+					"Ng1-h3 O-O" +
+					"";
+			
+			String output =
+			"8|r|n|b|q|k|b|n|r|\n" +
+			"7|p|p|p|p|p|p|p|p|\n" +
+			"6|_|_|_|_|_|_|_|_|\n" +
+			"5|_|_|_|_|_|_|_|_|\n" +
+			"4|_|_|_|_|_|_|_|_|\n" +
+			"3|_|_|_|_|_|_|_|N|\n" +
+			"2|P|P|P|P|P|P|P|P|\n" +
+			"1|R|N|B|Q|K|B|_|R|\n" +
+			"  a b c d e f g h";
+			check(input,output);
+		}
+		
+		//Invalid queen side castle black
+		@Test public void invalid_castling_move_4() {
+			String input =
+					"Ng1-h3 O-O-O" +
+					"";
+			
+			String output =
+			"8|r|n|b|q|k|b|n|r|\n" +
+			"7|p|p|p|p|p|p|p|p|\n" +
+			"6|_|_|_|_|_|_|_|_|\n" +
+			"5|_|_|_|_|_|_|_|_|\n" +
+			"4|_|_|_|_|_|_|_|_|\n" +
+			"3|_|_|_|_|_|_|_|N|\n" +
+			"2|P|P|P|P|P|P|P|P|\n" +
+			"1|R|N|B|Q|K|B|_|R|\n" +
+			"  a b c d e f g h";
+			check(input,output);
+		}
+		
+		//Invalid castle piece
+		@Test public void invalid_castling_move_5() {
+			String input =
+					"d2-d3 a7-a6\n" +
+					"Nb1-d2 Ra8-a7\n" +
+					"Ra1-b1 Ra7-a8\n" +
+					"Nd2-b3 Ra8-a7\n" +
+					"Nb3-a1 Ra7-a8\n" +
+					"O-O-O\n" +
+					"";
+			
+			String output =
+			"8|r|n|b|q|k|b|n|r|\n" +
+			"7|_|p|p|p|p|p|p|p|\n" +
+			"6|p|_|_|_|_|_|_|_|\n" +
+			"5|_|_|_|_|_|_|_|_|\n" +
+			"4|_|_|_|_|_|_|_|_|\n" +
+			"3|_|_|_|P|_|_|_|_|\n" +
+			"2|P|P|P|_|P|P|P|P|\n" +
+			"1|N|R|B|Q|K|B|N|R|\n" +
+			"  a b c d e f g h";
+			check(input,output);
+		}
+		
+		//King moved
+		@Test public void invalid_castling_move_6() {
+			String input =
+					"e2-e4 d7-d6\n" +
+					"Ke1-e2 Qd8-d7\n" +
+					"O-O\n" +
+					"";
+			
+			String output =
+			"8|r|n|b|_|k|b|n|r|\n" +
+			"7|p|p|p|q|p|p|p|p|\n" +
+			"6|_|_|_|p|_|_|_|_|\n" +
+			"5|_|_|_|_|_|_|_|_|\n" +
+			"4|_|_|_|_|P|_|_|_|\n" +
+			"3|_|_|_|_|_|_|_|_|\n" +
+			"2|P|P|P|P|K|P|P|P|\n" +
+			"1|R|N|B|Q|_|B|N|R|\n" +
+			"  a b c d e f g h";
+			check(input,output);
+		}
+		
+		//Rook moved
+		@Test public void invalid_castling_move_7() {
+			String input =
+					"h2-h3 h7-h6\n" +
+					"Rh1-h2 g7-g6\n" +
+					"O-O\n" +
+					"";
+			
+			String output =
+			"8|r|n|b|q|k|b|n|r|\n" +
+			"7|p|p|p|p|p|p|_|_|\n" +
+			"6|_|_|_|_|_|_|p|p|\n" +
+			"5|_|_|_|_|_|_|_|_|\n" +
+			"4|_|_|_|_|_|_|_|_|\n" +
+			"3|_|_|_|_|_|_|_|P|\n" +
+			"2|P|P|P|P|P|P|P|R|\n" +
+			"1|R|N|B|Q|K|B|N|_|\n" +
+			"  a b c d e f g h";
+			check(input,output);
+		}
+		
+		//Not a king in the king spot
+		@Test public void invalid_castling_move_8() {
+			String input =
+					"e2-e3 a7-a6\n" +
+					"Ke1-e2 a6-a5\n" +
+					"Qd1-e1 a5-a4\n" +
+					"O-O\n" +
+					"";
+			
+			String output =
+			"8|r|n|b|q|k|b|n|r|\n" +
+			"7|_|p|p|p|p|p|p|p|\n" +
+			"6|_|_|_|_|_|_|_|_|\n" +
+			"5|_|_|_|_|_|_|_|_|\n" +
+			"4|p|_|_|_|_|_|_|_|\n" +
+			"3|_|_|_|_|P|_|_|_|\n" +
+			"2|P|P|P|P|K|P|P|P|\n" +
+			"1|R|N|B|_|Q|B|N|R|\n" +
+			"  a b c d e f g h";
+			check(input,output);
+		}
+		
+		//King has moved
+		@Test public void invalid_castling_move_10() {
+			String input =
+					"e2-e3 e7-e6\n" +
+					"Ke1-e2 f7-f6\n" +
+					"Ke2-e1 d7-d6\n" +
+					"Bf1-e2 c7-c6\n" +
+					"Ng1-h3 b7-b6\n" +
+					"O-O\n" +
+					"";
+			
+			String output =
+			"8|r|n|b|q|k|b|n|r|\n" +
+			"7|p|_|_|_|_|_|p|p|\n" +
+			"6|_|p|p|p|p|p|_|_|\n" +
+			"5|_|_|_|_|_|_|_|_|\n" +
+			"4|_|_|_|_|_|_|_|_|\n" +
+			"3|_|_|_|_|P|_|_|N|\n" +
+			"2|P|P|P|P|B|P|P|P|\n" +
+			"1|R|N|B|Q|K|_|_|R|\n" +
+			"  a b c d e f g h";
+			check(input,output);
+		}
+		
+		//Rook has moved
+		@Test public void invalid_castling_move_11() {
+			String input =
+					"Ng1-h3 a7-a6\n" +
+					"g2-g3 a6-a5\n" +
+					"Bf1-g2 a5-a4\n" +
+					"Rh1-g1 a4-a3\n" +
+					"Rg1-h1 Ra8-a4\n" +
+					"O-O\n" +
+					"";
+			
+			String output =
+			"8|_|n|b|q|k|b|n|r|\n" +
+			"7|_|p|p|p|p|p|p|p|\n" +
+			"6|_|_|_|_|_|_|_|_|\n" +
+			"5|_|_|_|_|_|_|_|_|\n" +
+			"4|r|_|_|_|_|_|_|_|\n" +
+			"3|p|_|_|_|_|_|P|N|\n" +
+			"2|P|P|P|P|P|P|B|P|\n" +
+			"1|R|N|B|Q|K|_|_|R|\n" +
+			"  a b c d e f g h";
+			check(input,output);
+		}
+		
+		
+					
+				
+		// ================================================
+		// Test toString
+		// ================================================
+		
+		//king side toString
+		@Test public void test_toString_1() {
+		
+			Castling c = new Castling(true, true);
+			assertEquals(c.toString(), "O-O");
+		
+		}
+		//queen side toString
+		@Test public void test_toString_2() {
+		
+			Castling c = new Castling(true, false);
+			assertEquals(c.toString(), "O-O-O");
+		
+		}
 
 
 		// The following provides a simple helper method for all tests.
