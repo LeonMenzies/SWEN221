@@ -1,14 +1,8 @@
 package swen221.piece.tests;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import java.util.List;
-
 import org.junit.Test;
 
-import swen221.chessview.Board;
-import swen221.chessview.ChessGame;
+import swen221.tests.ChessViewTests;
 
 	public class ChessViewBishopTests {
 
@@ -176,24 +170,9 @@ import swen221.chessview.ChessGame;
 		}
 					
 	
-						
-				
-		
-
-
-
-		// The following provides a simple helper method for all tests.
+		//Use the main ChessViewTest class to compare the input and outputs
 		public static void check(String input, String expectedOutput) {
-			try {
-				ChessGame game = new ChessGame(input);
-				List<Board> boards = game.boards();
-				if (boards.isEmpty()) {
-					fail("test failed with insufficient boards on input: " + input);
-				}
-				String actualOutput = boards.get(boards.size() - 1).toString();
-				assertEquals(expectedOutput, actualOutput);
-			} catch (Exception e) {
-				fail("test failed because of exception on input: " + input);
-			}
+			new ChessViewTests();
+			ChessViewTests.check(input, expectedOutput);
 		}
 	}

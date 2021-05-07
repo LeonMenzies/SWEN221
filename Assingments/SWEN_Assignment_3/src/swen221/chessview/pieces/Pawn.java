@@ -26,15 +26,22 @@ public class Pawn extends PieceImpl implements Piece {
 		// difference between a take and non-take move for pawns.
 
 		if (isTaken != null) {
-			return this.equals(p) && isTaken.equals(t)
+			return this.equals(p) 
+					&& isTaken.equals(t)
 					&& (oldCol == (newCol + 1) || oldCol == (newCol - 1))
 					&& (oldRow + dir) == newRow;
-		} else if ((oldRow + dir) == newRow && oldCol == newCol) {
-			return this.equals(p) && t == null;
-		} else if ((oldRow + dir + dir) == newRow && oldCol == newCol) {
-			return ((dir == 1 && oldRow == 2) || (dir == -1 && oldRow == 7))
+		} else if ((oldRow + dir) == newRow 
+				&& oldCol == newCol) {
+			return this.equals(p) 
+					&& t == null;
+		} else if ((oldRow + dir + dir) == newRow 
+				&& oldCol == newCol) {
+			return ((dir == 1 
+					&& oldRow == 2) || (dir == -1 
+					&& oldRow == 7))
 					&& board.pieceAt(new Position(oldRow + dir, oldCol)) == null
-					&& t == null && this.equals(p);
+					&& t == null 
+					&& this.equals(p);
 		}
 		return false;
 	}
