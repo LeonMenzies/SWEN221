@@ -1,3 +1,4 @@
+
 package swen221.piece.tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,93 +11,74 @@ import org.junit.Test;
 import swen221.chessview.Board;
 import swen221.chessview.ChessGame;
 
-	public class ChessViewBishopTests {
+	public class ChessViewKingTests {
 
 		// ================================================
 		// Valid Tests
 		// ================================================
 
 		
-		//Bishop white and black moves
-		@Test public void bishop_valid_1() {
+		//King diagonal move
+		@Test public void king_valid_1() {
 			String input =
-					"e2-e3 d7-d6\n" +
-					"Bf1-c4 Bc8-e6\n" +
-					"Bc4xBe6\n" +
+					"f2-f3 d7-d6\n" +
+					"Ke1-f2 Ke8-d7\n" +
 					"";
 			
 			String output =
-				"8|r|n|_|q|k|b|n|r|\n" +
-				"7|p|p|p|_|p|p|p|p|\n" +
-				"6|_|_|_|p|B|_|_|_|\n" +
+				"8|r|n|b|q|_|b|n|r|\n" +
+				"7|p|p|p|k|p|p|p|p|\n" +
+				"6|_|_|_|p|_|_|_|_|\n" +
 				"5|_|_|_|_|_|_|_|_|\n" +
 				"4|_|_|_|_|_|_|_|_|\n" +
-				"3|_|_|_|_|P|_|_|_|\n" +
-				"2|P|P|P|P|_|P|P|P|\n" +
-				"1|R|N|B|Q|K|_|N|R|\n" +
+				"3|_|_|_|_|_|P|_|_|\n" +
+				"2|P|P|P|P|P|K|P|P|\n" +
+				"1|R|N|B|Q|_|B|N|R|\n" +
 				"  a b c d e f g h";
 
 			check(input,output);
 		}
 		
-		//Bishop black takes white piece
-		@Test public void bishop_valid_2() {
+		//King white take moves
+		@Test public void king_valid_2() {
 			String input =
-					"h2-h3 b7-b6\n" +
-					"Rh1-h2 Bc8-a6\n" +
-					"Rh2-h1 Ba6xe2\n" +
+					"f2-f3 d7-d6\n" +
+					"Ke1-f2 Ke8-d7\n" +
+					"Kf2-g3 g7-g5\n" +
+					"Kg3-g4 d6-d5\n" +
+					"Kg4xg5 Ng8-f6\n" +
+					"Kg5-f4 Nf6-h5+\n" +
+					"Kf4-g4 Kd7-d6+\n" +
+					"Kg4xNh5 c7-c6\n" +
+					"Kh5-h4 Kd6-c7\n" +
 					"";
 			
 			String output =
-				"8|r|n|_|q|k|b|n|r|\n" +
-				"7|p|_|p|p|p|p|p|p|\n" +
-				"6|_|p|_|_|_|_|_|_|\n" +
-				"5|_|_|_|_|_|_|_|_|\n" +
-				"4|_|_|_|_|_|_|_|_|\n" +
-				"3|_|_|_|_|_|_|_|P|\n" +
-				"2|P|P|P|P|b|P|P|_|\n" +
-				"1|R|N|B|Q|K|B|N|R|\n" +
+				"8|r|n|b|q|_|b|_|r|\n" +
+				"7|p|p|k|_|p|p|_|p|\n" +
+				"6|_|_|p|_|_|_|_|_|\n" +
+				"5|_|_|_|p|_|_|_|_|\n" +
+				"4|_|_|_|_|_|_|_|K|\n" +
+				"3|_|_|_|_|_|P|_|_|\n" +
+				"2|P|P|P|P|P|_|P|P|\n" +
+				"1|R|N|B|Q|_|B|N|R|\n" +
 				"  a b c d e f g h";
 
 			check(input,output);
 		}
-			
-		//Bishop black takes white piece
-		@Test public void bishop_valid_3() {
-			String input =
-					"g2-g3 a7-a6\n" +
-					"Bf1-h3 a6-a5\n" +
-					"";
-			
-			String output =
-				"8|r|n|b|q|k|b|n|r|\n" +
-				"7|_|p|p|p|p|p|p|p|\n" +
-				"6|_|_|_|_|_|_|_|_|\n" +
-				"5|p|_|_|_|_|_|_|_|\n" +
-				"4|_|_|_|_|_|_|_|_|\n" +
-				"3|_|_|_|_|_|_|P|B|\n" +
-				"2|P|P|P|P|P|P|_|P|\n" +
-				"1|R|N|B|Q|K|_|N|R|\n" +
-				"  a b c d e f g h";
-
-			check(input,output);
-		}
-						
 				
-				
+		
 			
-		
-		
-	
+			
 
 		// ================================================
 		// Invalid Tests
 		// ================================================
 
-		//Bishop cant move sideways
-		@Test public void bishop_invalid_1() {
+		//King invalid move to taken spot
+		@Test public void king_invalid_1() {
 			String input =
-					"Bf1-e1\n" +
+					"Ke1-d1\n" +
 					"";
 			
 			String output =
@@ -113,10 +95,10 @@ import swen221.chessview.ChessGame;
 			check(input,output);
 		}
 		
-		//Bishop no move
-		@Test public void bishop_invalid_2() {
+		//King invalid diagonal move
+		@Test public void king_invalid_2() {
 			String input =
-					"Bf1-f1\n" +
+					"Ke1-f2\n" +
 					"";
 			
 			String output =
@@ -133,48 +115,55 @@ import swen221.chessview.ChessGame;
 			check(input,output);
 		}
 		
-		//try to move no bishop piece
-		@Test public void bishop_invalid_3() {
-			String input =
-					"Be1-f1\n" +
-					"";
-			
-			String output =
-					"8|r|n|b|q|k|b|n|r|\n" +
-					"7|p|p|p|p|p|p|p|p|\n" +
-					"6|_|_|_|_|_|_|_|_|\n" +
-					"5|_|_|_|_|_|_|_|_|\n" +
-					"4|_|_|_|_|_|_|_|_|\n" +
-					"3|_|_|_|_|_|_|_|_|\n" +
-					"2|P|P|P|P|P|P|P|P|\n" +
-					"1|R|N|B|Q|K|B|N|R|\n" +
-					"  a b c d e f g h";
-
-			check(input,output);
-		}
 		
-		//Bishop take incorrect piece
-		@Test public void bishop_valid_4() {
+		//move piece that is not actually a king piece
+		@Test public void king_invalid_3() {
 			String input =
-					"g2-g3 d7-d6\n" +
-					"Bf1-h3 d6-d5\n" +
-					"Bh3xQc8\n" +
+					"Kf2-f3" +
 					"";
 			
 			String output =
 				"8|r|n|b|q|k|b|n|r|\n" +
-				"7|p|p|p|_|p|p|p|p|\n" +
+				"7|p|p|p|p|p|p|p|p|\n" +
 				"6|_|_|_|_|_|_|_|_|\n" +
-				"5|_|_|_|p|_|_|_|_|\n" +
+				"5|_|_|_|_|_|_|_|_|\n" +
 				"4|_|_|_|_|_|_|_|_|\n" +
-				"3|_|_|_|_|_|_|P|B|\n" +
-				"2|P|P|P|P|P|P|_|P|\n" +
-				"1|R|N|B|Q|K|_|N|R|\n" +
+				"3|_|_|_|_|_|_|_|_|\n" +
+				"2|P|P|P|P|P|P|P|P|\n" +
+				"1|R|N|B|Q|K|B|N|R|\n" +
 				"  a b c d e f g h";
 
 			check(input,output);
 		}
-					
+		
+		//King white take moves
+		@Test public void king_invalid_4() {
+			String input =
+					"f2-f3 d7-d6\n" +
+					"Ke1-f2 Ke8-d7\n" +
+					"Kf2-g3 g7-g5\n" +
+					"Kg3-g4 d6-d5\n" +
+					"Kg4xg5 Ng8-f6\n" +
+					"Kg5-f4 Nf6-h5+\n" +
+					"Kf4-g4 Kd7-d6+\n" +
+					"Kg4xQh5" +		
+					"";
+			
+			String output =
+				"8|r|n|b|q|_|b|_|r|\n" +
+				"7|p|p|p|_|p|p|_|p|\n" +
+				"6|_|_|_|k|_|_|_|_|\n" +
+				"5|_|_|_|p|_|_|_|n|\n" +
+				"4|_|_|_|_|_|_|K|_|\n" +
+				"3|_|_|_|_|_|P|_|_|\n" +
+				"2|P|P|P|P|P|_|P|P|\n" +
+				"1|R|N|B|Q|_|B|N|R|\n" +
+				"  a b c d e f g h";
+
+			check(input,output);
+		}
+
+		
 	
 						
 				

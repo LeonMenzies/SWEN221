@@ -18,8 +18,9 @@ public class King extends PieceImpl implements Piece {
 		Piece p = board.pieceAt(oldPosition);
 		Piece t = board.pieceAt(newPosition);
 		return this.equals(p)
-				&& (t == isTaken || (isTaken != null && isTaken.equals(t)))
-				&& diffCol == 1 || diffRow == 1;
+				&& (t == isTaken || (isTaken != null 
+				&& isTaken.equals(t)))
+				&& diffCol + diffRow <= 2;
 	}
 
 	@Override

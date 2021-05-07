@@ -1,6 +1,7 @@
 package swen221.chessview.pieces;
 
-import swen221.chessview.*;
+import swen221.chessview.Board;
+import swen221.chessview.Position;
 
 public class Knight extends PieceImpl implements Piece {
 	public Knight(boolean isWhite) {
@@ -16,7 +17,9 @@ public class Knight extends PieceImpl implements Piece {
 		Piece p = board.pieceAt(oldPosition);
 		Piece t = board.pieceAt(newPosition);
 		return this.equals(p)
-				&& (t == isTaken || (isTaken != null && isTaken.equals(t)))
+				&& (t == isTaken 
+				|| (isTaken != null 
+				&& isTaken.equals(t)))
 				&& ((diffCol == 2 && diffRow == 1) || (diffCol == 1 && diffRow == 2));
 	}
 	
