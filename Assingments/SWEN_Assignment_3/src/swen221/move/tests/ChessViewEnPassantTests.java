@@ -1,6 +1,6 @@
 
 
-package swen221.tests;
+package swen221.move.tests;
 
 import org.junit.Test;
 
@@ -280,6 +280,7 @@ import org.junit.Test;
 		}
 		
 		
+		//Use the main ChessViewTest class to compare the input and outputs
 		public static void check(String input, String expectedOutput) {
 			new ChessViewTests();
 			ChessViewTests.check(input, expectedOutput);

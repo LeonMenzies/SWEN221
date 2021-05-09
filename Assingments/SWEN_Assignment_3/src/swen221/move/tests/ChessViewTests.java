@@ -1,5 +1,7 @@
-package swen221.tests;
+package swen221.move.tests;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -9,6 +11,11 @@ import org.junit.Test;
 
 import swen221.chessview.Board;
 import swen221.chessview.ChessGame;
+import swen221.chessview.Position;
+import swen221.chessview.Round;
+import swen221.chessview.moves.SinglePieceMove;
+import swen221.chessview.pieces.Bishop;
+import swen221.chessview.pieces.Pawn;
 
 public class ChessViewTests {
 
@@ -401,9 +408,161 @@ public class ChessViewTests {
 		check(input,output);
 	}
 	
+	//Stale Mate
+	@Test public void test_stale_mate() {
+		
+		
+		String input =
+				"c2-c3 Ng8-h6\n" +
+				"Qd1-a4 Nh6-g8\n" +
+				"Qa4xa7 Ng8-h6\n" +
+				"Qa7xRa8 Nh6-g8\n" +
+				"Qa8xNb8 Ng8-h6\n" +
+				"Qb8xb7 Nh6-g8\n" +
+				"Qb7xc7 Ng8-h6\n" +
+				"Qc7xBc8 f7-f6\n" +
+				"a2-a4 Ke8-f7\n" +
+				"Qc8xQd8 Kf7-e6\n" +
+				"Qd8xBf8 Ke6-d6\n" +
+				"Qf8xRh8 Kd6-c7\n" +
+				"Qh8xh7 Kc7-b7\n" +
+				"Qh7xNh6 Kb7-c8\n" +
+				"Qh6xg7 Kc8-b8\n" +
+				"Qg7xf6 Kb8-a8\n" +
+				"Qf6xe7 Ka8-b8\n" +
+				"Qe7xd7 Kb8-a8\n" +
+				"Ra1-a3 Ka8-b8\n" +
+				"Ra3-b3+ Kb8-a8\n" +
+				"g2-g3\n" +
 
+			"";
+		String output =
+			"8|k|_|_|_|_|_|_|_|\n" +
+			"7|_|_|_|Q|_|_|_|_|\n" +
+			"6|_|_|_|_|_|_|_|_|\n" +
+			"5|_|_|_|_|_|_|_|_|\n" +
+			"4|P|_|_|_|_|_|_|_|\n" +
+			"3|_|R|P|_|_|_|P|_|\n" +
+			"2|_|P|_|P|P|P|_|P|\n" +
+			"1|_|N|B|_|K|B|N|R|\n" +
+			"  a b c d e f g h";
 
+		check(input,output);
+	}
+	
+	
+	//non-check test
+	@Test public void random_test_1() {
+		
+		
+		String input =
+			"e2-e3 d7-d6\n" +
+			"Bf1-b5+ e7-e6\n" +
+			"";
+		String output =
+			"8|r|n|b|q|k|b|n|r|\n" +
+			"7|p|p|p|_|p|p|p|p|\n" +
+			"6|_|_|_|p|_|_|_|_|\n" +
+			"5|_|B|_|_|_|_|_|_|\n" +
+			"4|_|_|_|_|_|_|_|_|\n" +
+			"3|_|_|_|_|P|_|_|_|\n" +
+			"2|P|P|P|P|_|P|P|P|\n" +
+			"1|R|N|B|Q|K|_|N|R|\n" +
+			"  a b c d e f g h";
+		
+		check(input,output);
+	}
+	
+	//skip blank lines
+	@Test public void random_test_2() {
+		
+		
+		String input =
+			"e2-e3 d7-d6\n" +
+			"\n" +
+			
+			"";
+		String output =
+			"8|r|n|b|q|k|b|n|r|\n" +
+			"7|p|p|p|_|p|p|p|p|\n" +
+			"6|_|_|_|p|_|_|_|_|\n" +
+			"5|_|_|_|_|_|_|_|_|\n" +
+			"4|_|_|_|_|_|_|_|_|\n" +
+			"3|_|_|_|_|P|_|_|_|\n" +
+			"2|P|P|P|P|_|P|P|P|\n" +
+			"1|R|N|B|Q|K|B|N|R|\n" +
+			"  a b c d e f g h";
+		
+		check(input,output);
+	}
+	
+	
+	
+	// ================================================
+	// Position Tests
+	// ================================================
+	
+		//Checking poistion.equals with incorrect object
+		@Test public void position_test_1() {			
+		assertFalse(new Position(1, 2).equals(new Pawn(false)));
+		}
+		
+		//Invalid position checks
+		@Test public void position_test_2() {
+									
+		assertFalse(new Position(0, 1).isValid());
+		assertFalse(new Position(9, 1).isValid());
+		assertFalse(new Position(1, 0).isValid());
+		assertFalse(new Position(1, 9).isValid());
+			
+		}
+		
 
+	// ================================================
+	// Round Tests
+	// ================================================
+		
+				
+		
+		
+		//check white null move
+		@Test public void round_test_1() {	
+			
+			SinglePieceMove whiteMove = new SinglePieceMove(new Pawn(false), new Position(0, 0), new Position(1, 1));
+			SinglePieceMove blackMove = new SinglePieceMove(new Pawn(false), new Position(1, 1), new Position(0, 0));
+			Round r1 = new Round(whiteMove, blackMove);
+			Round r2 = new Round(whiteMove, null);
+			assertEquals(r1.toString(), "`0-a1 a1-`0");
+			assertEquals(r2.toString(), "`0-a1");
+		}	
+		
+		
+
+		// ================================================
+		// PieceImpl Tests
+		// ================================================
+			
+		//Check the equals method of the pieces
+		@Test public void piece_empl_test_1() {	
+			
+			Bishop b = new Bishop(true);
+			assertTrue(b.equals(new Bishop(true)));
+			assertFalse(b.equals(new Bishop(false)));
+			assertFalse(b.equals(new String()));
+		}			
+		
+			
+		// ================================================
+		// PieceImpl Tests
+		// ================================================
+			
+
+		
+	
+
+	
+	
+	
 
 	// The following provides a simple helper method for all tests.
 	public static void check(String input, String expectedOutput) {

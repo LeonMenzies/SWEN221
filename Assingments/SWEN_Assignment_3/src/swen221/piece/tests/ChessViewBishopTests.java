@@ -2,7 +2,7 @@ package swen221.piece.tests;
 
 import org.junit.Test;
 
-import swen221.tests.ChessViewTests;
+import swen221.move.tests.ChessViewTests;
 
 	public class ChessViewBishopTests {
 

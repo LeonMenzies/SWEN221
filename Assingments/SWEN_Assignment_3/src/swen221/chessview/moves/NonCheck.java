@@ -1,7 +1,6 @@
 package swen221.chessview.moves;
 
-import swen221.chessview.*;
-import swen221.chessview.pieces.*;
+import swen221.chessview.Board;
 
 public class NonCheck implements Move {
 	private MultiPieceMove move;
@@ -27,10 +26,10 @@ public class NonCheck implements Move {
 
 			// First, copy board and apply underlying move.
 			board = new Board(board);
-			board.apply(move);
+			board.apply(move());
 
 			// Second, check opposition is not in check.
-			return board != null && !board.isInCheck(isWhite());
+			return !board.isInCheck(isWhite());
 		}
 		return false;
 	}

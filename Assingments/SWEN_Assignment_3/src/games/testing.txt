@@ -1,3 +1,21 @@
-e2-e4 a7-a6
-e4-e5 d7-d5
-e5xd6ep
+c2-c3 Ng8-h6
+Qd1-a4 Nh6-g8
+Qa4xa7 Ng8-h6
+Qa7xRa8 Nh6-g8
+Qa8xNb8 Ng8-h6
+Qb8xb7 Nh6-g8
+Qb7xc7 Ng8-h6
+Qc7xBc8 f7-f6
+a2-a4 Ke8-f7
+Qc8xQd8 Kf7-e6
+Qd8xBf8 Ke6-d6
+Qf8xRh8 Kd6-c7
+Qh8xh7 Kc7-b7
+Qh7xNh6 Kb7-c8
+Qh6xg7 Kc8-b8
+Qg7xf6 Kb8-a8
+Qf6xe7 Ka8-b8
+Qe7xd7 Kb8-a8
+Ra1-a3 Ka8-b8
+Ra3-b3+ Kb8-a8
+g2-g3

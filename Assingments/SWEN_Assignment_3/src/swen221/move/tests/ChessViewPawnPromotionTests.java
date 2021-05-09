@@ -2,17 +2,9 @@
 
 
 
-package swen221.tests;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import java.util.List;
+package swen221.move.tests;
 
 import org.junit.Test;
-
-import swen221.chessview.Board;
-import swen221.chessview.ChessGame;
 
 	public class ChessViewPawnPromotionTests {
 
@@ -170,93 +162,84 @@ import swen221.chessview.ChessGame;
 		// Invalid Tests
 		// ================================================
 
-				//Trying to premote piece not at end of board
-				@Test public void invalid_pawn_promotion_1() {
-					String input =
-							"g2-g4 f7-f5\n" +
-							"Ng1-h3 f5xg4\n" +
-							"Nh3-f4 g4-g3\n" +
-							"Nf4-h3 g3-g2=Q\n" +
-							
-							"";
+		//Trying to premote piece not at end of board
+		@Test public void invalid_pawn_promotion_1() {
+			String input =
+					"g2-g4 f7-f5\n" +
+					"Ng1-h3 f5xg4\n" +
+					"Nh3-f4 g4-g3\n" +
+					"Nf4-h3 g3-g2=Q\n" +
 					
-					String output =
-						"8|r|n|b|q|k|b|n|r|\n" +
-						"7|p|p|p|p|p|_|p|p|\n" +
-						"6|_|_|_|_|_|_|_|_|\n" +
-						"5|_|_|_|_|_|_|_|_|\n" +
-						"4|_|_|_|_|_|_|_|_|\n" +
-						"3|_|_|_|_|_|_|p|N|\n" +
-						"2|P|P|P|P|P|P|_|P|\n" +
-						"1|R|N|B|Q|K|B|_|R|\n" +
-						"  a b c d e f g h";
+					"";
+			
+			String output =
+				"8|r|n|b|q|k|b|n|r|\n" +
+				"7|p|p|p|p|p|_|p|p|\n" +
+				"6|_|_|_|_|_|_|_|_|\n" +
+				"5|_|_|_|_|_|_|_|_|\n" +
+				"4|_|_|_|_|_|_|_|_|\n" +
+				"3|_|_|_|_|_|_|p|N|\n" +
+				"2|P|P|P|P|P|P|_|P|\n" +
+				"1|R|N|B|Q|K|B|_|R|\n" +
+				"  a b c d e f g h";
 
-					check(input,output);
-				}
-				
-				//Trying to premote no pawn piece
-				@Test public void invalid_pawn_promotion_2() {
-					String input =
-							"h2-h4 g7-g5\n" +
-							"h4xg5 h7-h6\n" +
-							"Rh1xh6 Rh8-h7\n" +
-							"Rh6xRh7 e7-e6\n" +
-							"Rh7-h8=Q\n" +
-							"";
-					
-					String output =
-						"8|r|n|b|q|k|b|n|_|\n" +
-						"7|p|p|p|p|_|p|_|R|\n" +
-						"6|_|_|_|_|p|_|_|_|\n" +
-						"5|_|_|_|_|_|_|P|_|\n" +
-						"4|_|_|_|_|_|_|_|_|\n" +
-						"3|_|_|_|_|_|_|_|_|\n" +
-						"2|P|P|P|P|P|P|P|_|\n" +
-						"1|R|N|B|Q|K|B|N|_|\n" +
-						"  a b c d e f g h";
+			check(input,output);
+		}
+		
+		//Trying to premote no pawn piece
+		@Test public void invalid_pawn_promotion_2() {
+			String input =
+					"h2-h4 g7-g5\n" +
+					"h4xg5 h7-h6\n" +
+					"Rh1xh6 Rh8-h7\n" +
+					"Rh6xRh7 e7-e6\n" +
+					"Rh7-h8=Q\n" +
+					"";
+			
+			String output =
+				"8|r|n|b|q|k|b|n|_|\n" +
+				"7|p|p|p|p|_|p|_|R|\n" +
+				"6|_|_|_|_|p|_|_|_|\n" +
+				"5|_|_|_|_|_|_|P|_|\n" +
+				"4|_|_|_|_|_|_|_|_|\n" +
+				"3|_|_|_|_|_|_|_|_|\n" +
+				"2|P|P|P|P|P|P|P|_|\n" +
+				"1|R|N|B|Q|K|B|N|_|\n" +
+				"  a b c d e f g h";
 
-					check(input,output);
-				}
-				
-				//Trying invalid move
-				@Test public void invalid_pawn_promotion_3() {
-					String input =
-							"h2-h4 g7-g5\n" +
-							"h4xg5 h7-h6\n" +
-							"Rh1xh6 Rh8-h7\n" +
-							"Rh6xRh7 e7-e6\n" +
-							"Rh7-g8=Q\n" +
-							"";
-					
-					String output =
-						"8|r|n|b|q|k|b|n|_|\n" +
-						"7|p|p|p|p|_|p|_|R|\n" +
-						"6|_|_|_|_|p|_|_|_|\n" +
-						"5|_|_|_|_|_|_|P|_|\n" +
-						"4|_|_|_|_|_|_|_|_|\n" +
-						"3|_|_|_|_|_|_|_|_|\n" +
-						"2|P|P|P|P|P|P|P|_|\n" +
-						"1|R|N|B|Q|K|B|N|_|\n" +
-						"  a b c d e f g h";
+			check(input,output);
+		}
+		
+		//Trying invalid move
+		@Test public void invalid_pawn_promotion_3() {
+			String input =
+					"h2-h4 g7-g5\n" +
+					"h4xg5 h7-h6\n" +
+					"Rh1xh6 Rh8-h7\n" +
+					"Rh6xRh7 e7-e6\n" +
+					"Rh7-g8=Q\n" +
+					"";
+			
+			String output =
+				"8|r|n|b|q|k|b|n|_|\n" +
+				"7|p|p|p|p|_|p|_|R|\n" +
+				"6|_|_|_|_|p|_|_|_|\n" +
+				"5|_|_|_|_|_|_|P|_|\n" +
+				"4|_|_|_|_|_|_|_|_|\n" +
+				"3|_|_|_|_|_|_|_|_|\n" +
+				"2|P|P|P|P|P|P|P|_|\n" +
+				"1|R|N|B|Q|K|B|N|_|\n" +
+				"  a b c d e f g h";
 
-					check(input,output);
-				}
+			check(input,output);
+		}
 		
 
 
 
-		// The following provides a simple helper method for all tests.
+		//Use the main ChessViewTest class to compare the input and outputs
 		public static void check(String input, String expectedOutput) {
-			try {
-				ChessGame game = new ChessGame(input);
-				List<Board> boards = game.boards();
-				if (boards.isEmpty()) {
-					fail("test failed with insufficient boards on input: " + input);
-				}
-				String actualOutput = boards.get(boards.size() - 1).toString();
-				assertEquals(expectedOutput, actualOutput);
-			} catch (Exception e) {
-				fail("test failed because of exception on input: " + input);
-			}
+			new ChessViewTests();
+			ChessViewTests.check(input, expectedOutput);
 		}
 	}

@@ -18,7 +18,10 @@ public final class Position {
 	}
 	
 	public boolean isValid() {
-		return col >= 1 && col <= 8 && row >= 1 && row <= 8;
+		return col >= 1 
+				&& col <= 8 
+				&& row >= 1 
+				&& row <= 8;
 	}
 	
 	public boolean equals(Object o) {

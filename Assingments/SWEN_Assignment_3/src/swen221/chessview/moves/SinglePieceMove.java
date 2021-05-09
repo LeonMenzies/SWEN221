@@ -41,7 +41,9 @@ public class SinglePieceMove implements MultiPieceMove {
 
 	@Override
 	public boolean isValid(Board board) {
-		return oldPosition.isValid() && newPosition.isValid() && piece.isValidMove(oldPosition, newPosition, null, board);
+		return oldPosition.isValid() 
+				&& newPosition.isValid() 
+				&& piece.isValidMove(oldPosition, newPosition, null, board);
 	}
 
 	@Override
