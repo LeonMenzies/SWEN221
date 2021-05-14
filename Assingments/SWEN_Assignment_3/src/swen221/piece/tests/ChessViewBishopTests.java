@@ -2,7 +2,7 @@ package swen221.piece.tests;
 
 import org.junit.Test;
 
-import swen221.move.tests.ChessViewTests;
+import swen221.tests.ChessViewTests;
 
 	public class ChessViewBishopTests {
 
@@ -10,7 +10,6 @@ import swen221.move.tests.ChessViewTests;
 		// Valid Tests
 		// ================================================
 
-		
 		//Bishop white and black moves
 		@Test public void bishop_valid_1() {
 			String input =
@@ -74,14 +73,7 @@ import swen221.move.tests.ChessViewTests;
 				"  a b c d e f g h";
 
 			check(input,output);
-		}
-						
-				
-				
-			
-		
-		
-	
+		}			
 
 		// ================================================
 		// Invalid Tests

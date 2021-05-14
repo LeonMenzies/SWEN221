@@ -12,21 +12,16 @@ import swen221.chessview.pieces.Knight;
 import swen221.chessview.pieces.Pawn;
 import swen221.chessview.pieces.Queen;
 import swen221.chessview.pieces.Rook;
+import swen221.tests.ChessViewTests;
 
 	public class ChessViewSinglePieceMoveTests {
-
-		// ================================================
-		// Valid Tests
-		// ================================================
-
-		
 
 		// ================================================
 		// Invalid Tests
 		// ================================================
 
 		//invalid single piece old position
-		@Test public void single_piece_move_test_1() {
+		@Test public void single_piece_move_invalid_test_1() {
 		
 		
 		String input =
@@ -47,7 +42,7 @@ import swen221.chessview.pieces.Rook;
 		}
 		
 		//invalid single piece new position
-		@Test public void single_piece_move_test_2() {
+		@Test public void single_piece_move_invalid_test_2() {
 		
 		
 		String input =
@@ -66,9 +61,7 @@ import swen221.chessview.pieces.Rook;
 
 		check(input,output);
 		}
-		
-		
-		
+
 
 		// ================================================
 		// single piece moves
@@ -116,9 +109,6 @@ import swen221.chessview.pieces.Rook;
 			
 		}
 		
-
-
-
 
 		//Use the main ChessViewTest class to compare the input and outputs
 		public static void check(String input, String expectedOutput) {

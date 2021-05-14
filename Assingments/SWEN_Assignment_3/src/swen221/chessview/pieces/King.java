@@ -20,7 +20,11 @@ public class King extends PieceImpl implements Piece {
 		return this.equals(p)
 				&& (t == isTaken || (isTaken != null 
 				&& isTaken.equals(t)))
-				&& diffCol + diffRow <= 2;
+				&& diffCol + diffRow <= 2
+				&& (board.clearDiaganolExcept(oldPosition, newPosition, p, t)
+						|| board.clearColumnExcept(oldPosition, newPosition, p,
+								t) || board.clearRowExcept(oldPosition,
+						newPosition, p, t));
 	}
 
 	@Override

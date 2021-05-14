@@ -1,4 +1,4 @@
-package swen221.move.tests;
+package swen221.tests;
 
 import java.io.IOException;
 

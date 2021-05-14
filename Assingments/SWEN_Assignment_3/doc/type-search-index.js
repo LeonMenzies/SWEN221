@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"swen221.chessview","l":"Board"}];updateSearchResults();

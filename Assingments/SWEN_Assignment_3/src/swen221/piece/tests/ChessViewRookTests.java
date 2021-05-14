@@ -2,7 +2,7 @@ package swen221.piece.tests;
 
 import org.junit.Test;
 
-import swen221.move.tests.ChessViewTests;
+import swen221.tests.ChessViewTests;
 
 	public class ChessViewRookTests {
 
@@ -93,8 +93,6 @@ import swen221.move.tests.ChessViewTests;
 			check(input,output);
 		}
 					
-				
-		
 
 		//Use the main ChessViewTest class to compare the input and outputs
 		public static void check(String input, String expectedOutput) {

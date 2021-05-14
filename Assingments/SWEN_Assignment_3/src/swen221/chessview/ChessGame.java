@@ -9,6 +9,7 @@ import java.util.List;
 
 import swen221.chessview.moves.Castling;
 import swen221.chessview.moves.Check;
+import swen221.chessview.moves.CheckMate;
 import swen221.chessview.moves.EnPassant;
 import swen221.chessview.moves.Move;
 import swen221.chessview.moves.MultiPieceMove;
@@ -204,9 +205,9 @@ public class ChessGame {
 				case 'B':
 					promotion = new Bishop(isWhite);
 					break;
-				case 'K':
-					promotion = new King(isWhite);
-					break;
+//				case 'K':
+//					promotion = new King(isWhite); Not allowd in chess
+//					break; 
 				case 'Q':
 					promotion = new Queen(isWhite);
 					break;
@@ -220,10 +221,12 @@ public class ChessGame {
 		if(index < str.length() && str.charAt(index) == '+') {
 			move = new Check((MultiPieceMove) move);
 			index++;
-		} else {
+		} else if(index < str.length() && str.charAt(index) == '#') {
+			move = new CheckMate((MultiPieceMove)move);
+			index++;
+		}else {
 			move = new NonCheck((MultiPieceMove) move);
 		}
-
 		if(index != str.length()) {
 			throw new IllegalArgumentException("invalid sheet");
 		}

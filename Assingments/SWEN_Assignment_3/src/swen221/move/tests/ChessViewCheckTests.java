@@ -1,14 +1,14 @@
 package swen221.move.tests;
 
-
 import org.junit.Test;
+
+import swen221.tests.ChessViewTests;
 
 	public class ChessViewCheckTests {
 
 		// ================================================
 		// Valid Tests
 		// ================================================
-
 		
 		//white gets black in check
 		@Test public void white_check_1() {
@@ -51,8 +51,6 @@ import org.junit.Test;
 
 			check(input,output);
 		}
-		
-		
 
 		// ================================================
 		// Invalid Tests
@@ -98,10 +96,7 @@ import org.junit.Test;
 
 			check(input,output);
 		}
-				
-		
-		
-	
+
 		//Use the main ChessViewTest class to compare the input and outputs
 		public static void check(String input, String expectedOutput) {
 			new ChessViewTests();

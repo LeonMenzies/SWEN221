@@ -1,8 +1,8 @@
-
-
 package swen221.move.tests;
 
 import org.junit.Test;
+
+import swen221.tests.ChessViewTests;
 
 	public class ChessViewEnPassantTests {
 
@@ -54,7 +54,6 @@ import org.junit.Test;
 			check(input,output);
 		}
 		
-	
 
 		// ================================================
 		// Invalid Tests

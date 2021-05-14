@@ -2,14 +2,13 @@ package swen221.piece.tests;
 
 import org.junit.Test;
 
-import swen221.move.tests.ChessViewTests;
+import swen221.tests.ChessViewTests;
 
 	public class ChessViewPawnTests {
 
 		// ================================================
 		// Valid Tests
 		// ================================================
-
 		
 		//Pawn moves
 		@Test public void pawn_valid_1() {
@@ -35,11 +34,6 @@ import swen221.move.tests.ChessViewTests;
 			check(input,output);
 		}
 		
-		
-		
-
-	
-
 		// ================================================
 		// Invalid Tests
 		// ================================================
@@ -170,10 +164,8 @@ import swen221.move.tests.ChessViewTests;
             
 			check(input,output);
 		}
-				
-		
-	
 
+				
 		//Use the main ChessViewTest class to compare the input and outputs
 		public static void check(String input, String expectedOutput) {
 			new ChessViewTests();

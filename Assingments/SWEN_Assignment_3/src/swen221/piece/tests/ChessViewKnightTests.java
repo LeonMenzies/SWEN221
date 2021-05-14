@@ -1,10 +1,8 @@
 package swen221.piece.tests;
 
-
-
 import org.junit.Test;
 
-import swen221.move.tests.ChessViewTests;
+import swen221.tests.ChessViewTests;
 
 	public class ChessViewKnightTests {
 
@@ -12,7 +10,6 @@ import swen221.move.tests.ChessViewTests;
 		// Valid Tests
 		// ================================================
 
-		
 		//Knight moves and takes
 		@Test public void knight_valid_1() {
 			String input =
@@ -35,9 +32,6 @@ import swen221.move.tests.ChessViewTests;
 			check(input,output);
 		}
 		
-
-	
-
 		// ================================================
 		// Invalid Tests
 		// ================================================

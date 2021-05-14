@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.Test;
 
 import swen221.chessview.moves.Castling;
+import swen221.tests.ChessViewTests;
 
 	public class ChessViewCastlingTests {
 
@@ -38,52 +39,52 @@ import swen221.chessview.moves.Castling;
 			check(input,output);
 		}
 		
-			//White queen side castling
-			@Test public void castling_move_2() {
-				String input =
-						"Nb1-a3 h7-h6\n" +
-						"d2-d3 h6-h5\n" +
-						"Bc1-e3 h5-h4\n" +
-						"Qd1-d2 h4-h3\n" +
-						"O-O-O\n" +
-						"";
-				
-				String output =
-					"8|r|n|b|q|k|b|n|r|\n" +
-					"7|p|p|p|p|p|p|p|_|\n" +
-					"6|_|_|_|_|_|_|_|_|\n" +
-					"5|_|_|_|_|_|_|_|_|\n" +
-					"4|_|_|_|_|_|_|_|_|\n" +
-					"3|N|_|_|P|B|_|_|p|\n" +
-					"2|P|P|P|Q|P|P|P|P|\n" +
-					"1|_|_|K|R|_|B|N|R|\n" +
-					"  a b c d e f g h";
-
-				check(input,output);
-			}
+		//White queen side castling
+		@Test public void castling_move_2() {
+			String input =
+					"Nb1-a3 h7-h6\n" +
+					"d2-d3 h6-h5\n" +
+					"Bc1-e3 h5-h4\n" +
+					"Qd1-d2 h4-h3\n" +
+					"O-O-O\n" +
+					"";
 			
-			//Black king side castling
-			@Test public void castling_move_3() {
-				String input =
-						"a2-a3 Ng8-h6\n" +
-						"a3-a4 e7-e5\n" +
-						"a4-a5 Bf8-c5\n" +
-						"a5-a6 O-O\n" +                         
-						"";
-				
-				String output =
-					"8|r|n|b|q|_|r|k|_|\n" +
-					"7|p|p|p|p|_|p|p|p|\n" +
-					"6|P|_|_|_|_|_|_|n|\n" +
-					"5|_|_|b|_|p|_|_|_|\n" +
-					"4|_|_|_|_|_|_|_|_|\n" +
-					"3|_|_|_|_|_|_|_|_|\n" +
-					"2|_|P|P|P|P|P|P|P|\n" +
-					"1|R|N|B|Q|K|B|N|R|\n" +
-					"  a b c d e f g h";
-
-				check(input,output);
-			}
+			String output =
+				"8|r|n|b|q|k|b|n|r|\n" +
+				"7|p|p|p|p|p|p|p|_|\n" +
+				"6|_|_|_|_|_|_|_|_|\n" +
+				"5|_|_|_|_|_|_|_|_|\n" +
+				"4|_|_|_|_|_|_|_|_|\n" +
+				"3|N|_|_|P|B|_|_|p|\n" +
+				"2|P|P|P|Q|P|P|P|P|\n" +
+				"1|_|_|K|R|_|B|N|R|\n" +
+				"  a b c d e f g h";
+	
+			check(input,output);
+		}
+		
+		//Black king side castling
+		@Test public void castling_move_3() {
+			String input =
+					"a2-a3 Ng8-h6\n" +
+					"a3-a4 e7-e5\n" +
+					"a4-a5 Bf8-c5\n" +
+					"a5-a6 O-O\n" +                         
+					"";
+			
+			String output =
+				"8|r|n|b|q|_|r|k|_|\n" +
+				"7|p|p|p|p|_|p|p|p|\n" +
+				"6|P|_|_|_|_|_|_|n|\n" +
+				"5|_|_|b|_|p|_|_|_|\n" +
+				"4|_|_|_|_|_|_|_|_|\n" +
+				"3|_|_|_|_|_|_|_|_|\n" +
+				"2|_|P|P|P|P|P|P|P|\n" +
+				"1|R|N|B|Q|K|B|N|R|\n" +
+				"  a b c d e f g h";
+	
+			check(input,output);
+		}
 		
 			
 		//Black queen side castling
@@ -179,15 +180,15 @@ import swen221.chessview.moves.Castling;
 					"";
 			
 			String output =
-			"8|r|n|b|q|k|b|n|r|\n" +
-			"7|p|p|p|p|p|p|p|p|\n" +
-			"6|_|_|_|_|_|_|_|_|\n" +
-			"5|_|_|_|_|_|_|_|_|\n" +
-			"4|_|_|_|_|_|_|_|_|\n" +
-			"3|_|_|_|_|_|_|_|_|\n" +
-			"2|P|P|P|P|P|P|P|P|\n" +
-			"1|R|N|B|Q|K|B|N|R|\n" +
-			"  a b c d e f g h";
+				"8|r|n|b|q|k|b|n|r|\n" +
+				"7|p|p|p|p|p|p|p|p|\n" +
+				"6|_|_|_|_|_|_|_|_|\n" +
+				"5|_|_|_|_|_|_|_|_|\n" +
+				"4|_|_|_|_|_|_|_|_|\n" +
+				"3|_|_|_|_|_|_|_|_|\n" +
+				"2|P|P|P|P|P|P|P|P|\n" +
+				"1|R|N|B|Q|K|B|N|R|\n" +
+				"  a b c d e f g h";
 			check(input,output);
 		}
 		
@@ -198,15 +199,15 @@ import swen221.chessview.moves.Castling;
 					"";
 			
 			String output =
-			"8|r|n|b|q|k|b|n|r|\n" +
-			"7|p|p|p|p|p|p|p|p|\n" +
-			"6|_|_|_|_|_|_|_|_|\n" +
-			"5|_|_|_|_|_|_|_|_|\n" +
-			"4|_|_|_|_|_|_|_|_|\n" +
-			"3|_|_|_|_|_|_|_|_|\n" +
-			"2|P|P|P|P|P|P|P|P|\n" +
-			"1|R|N|B|Q|K|B|N|R|\n" +
-			"  a b c d e f g h";
+				"8|r|n|b|q|k|b|n|r|\n" +
+				"7|p|p|p|p|p|p|p|p|\n" +
+				"6|_|_|_|_|_|_|_|_|\n" +
+				"5|_|_|_|_|_|_|_|_|\n" +
+				"4|_|_|_|_|_|_|_|_|\n" +
+				"3|_|_|_|_|_|_|_|_|\n" +
+				"2|P|P|P|P|P|P|P|P|\n" +
+				"1|R|N|B|Q|K|B|N|R|\n" +
+				"  a b c d e f g h";
 			check(input,output);
 		}
 		
@@ -217,15 +218,15 @@ import swen221.chessview.moves.Castling;
 					"";
 			
 			String output =
-			"8|r|n|b|q|k|b|n|r|\n" +
-			"7|p|p|p|p|p|p|p|p|\n" +
-			"6|_|_|_|_|_|_|_|_|\n" +
-			"5|_|_|_|_|_|_|_|_|\n" +
-			"4|_|_|_|_|_|_|_|_|\n" +
-			"3|_|_|_|_|_|_|_|N|\n" +
-			"2|P|P|P|P|P|P|P|P|\n" +
-			"1|R|N|B|Q|K|B|_|R|\n" +
-			"  a b c d e f g h";
+				"8|r|n|b|q|k|b|n|r|\n" +
+				"7|p|p|p|p|p|p|p|p|\n" +
+				"6|_|_|_|_|_|_|_|_|\n" +
+				"5|_|_|_|_|_|_|_|_|\n" +
+				"4|_|_|_|_|_|_|_|_|\n" +
+				"3|_|_|_|_|_|_|_|N|\n" +
+				"2|P|P|P|P|P|P|P|P|\n" +
+				"1|R|N|B|Q|K|B|_|R|\n" +
+				"  a b c d e f g h";
 			check(input,output);
 		}
 		
@@ -236,15 +237,15 @@ import swen221.chessview.moves.Castling;
 					"";
 			
 			String output =
-			"8|r|n|b|q|k|b|n|r|\n" +
-			"7|p|p|p|p|p|p|p|p|\n" +
-			"6|_|_|_|_|_|_|_|_|\n" +
-			"5|_|_|_|_|_|_|_|_|\n" +
-			"4|_|_|_|_|_|_|_|_|\n" +
-			"3|_|_|_|_|_|_|_|N|\n" +
-			"2|P|P|P|P|P|P|P|P|\n" +
-			"1|R|N|B|Q|K|B|_|R|\n" +
-			"  a b c d e f g h";
+				"8|r|n|b|q|k|b|n|r|\n" +
+				"7|p|p|p|p|p|p|p|p|\n" +
+				"6|_|_|_|_|_|_|_|_|\n" +
+				"5|_|_|_|_|_|_|_|_|\n" +
+				"4|_|_|_|_|_|_|_|_|\n" +
+				"3|_|_|_|_|_|_|_|N|\n" +
+				"2|P|P|P|P|P|P|P|P|\n" +
+				"1|R|N|B|Q|K|B|_|R|\n" +
+				"  a b c d e f g h";
 			check(input,output);
 		}
 		
@@ -260,15 +261,15 @@ import swen221.chessview.moves.Castling;
 					"";
 			
 			String output =
-			"8|r|n|b|q|k|b|n|r|\n" +
-			"7|_|p|p|p|p|p|p|p|\n" +
-			"6|p|_|_|_|_|_|_|_|\n" +
-			"5|_|_|_|_|_|_|_|_|\n" +
-			"4|_|_|_|_|_|_|_|_|\n" +
-			"3|_|_|_|P|_|_|_|_|\n" +
-			"2|P|P|P|_|P|P|P|P|\n" +
-			"1|N|R|B|Q|K|B|N|R|\n" +
-			"  a b c d e f g h";
+				"8|r|n|b|q|k|b|n|r|\n" +
+				"7|_|p|p|p|p|p|p|p|\n" +
+				"6|p|_|_|_|_|_|_|_|\n" +
+				"5|_|_|_|_|_|_|_|_|\n" +
+				"4|_|_|_|_|_|_|_|_|\n" +
+				"3|_|_|_|P|_|_|_|_|\n" +
+				"2|P|P|P|_|P|P|P|P|\n" +
+				"1|N|R|B|Q|K|B|N|R|\n" +
+				"  a b c d e f g h";
 			check(input,output);
 		}
 		
@@ -281,15 +282,15 @@ import swen221.chessview.moves.Castling;
 					"";
 			
 			String output =
-			"8|r|n|b|_|k|b|n|r|\n" +
-			"7|p|p|p|q|p|p|p|p|\n" +
-			"6|_|_|_|p|_|_|_|_|\n" +
-			"5|_|_|_|_|_|_|_|_|\n" +
-			"4|_|_|_|_|P|_|_|_|\n" +
-			"3|_|_|_|_|_|_|_|_|\n" +
-			"2|P|P|P|P|K|P|P|P|\n" +
-			"1|R|N|B|Q|_|B|N|R|\n" +
-			"  a b c d e f g h";
+				"8|r|n|b|_|k|b|n|r|\n" +
+				"7|p|p|p|q|p|p|p|p|\n" +
+				"6|_|_|_|p|_|_|_|_|\n" +
+				"5|_|_|_|_|_|_|_|_|\n" +
+				"4|_|_|_|_|P|_|_|_|\n" +
+				"3|_|_|_|_|_|_|_|_|\n" +
+				"2|P|P|P|P|K|P|P|P|\n" +
+				"1|R|N|B|Q|_|B|N|R|\n" +
+				"  a b c d e f g h";
 			check(input,output);
 		}
 		
@@ -302,15 +303,15 @@ import swen221.chessview.moves.Castling;
 					"";
 			
 			String output =
-			"8|r|n|b|q|k|b|n|r|\n" +
-			"7|p|p|p|p|p|p|_|_|\n" +
-			"6|_|_|_|_|_|_|p|p|\n" +
-			"5|_|_|_|_|_|_|_|_|\n" +
-			"4|_|_|_|_|_|_|_|_|\n" +
-			"3|_|_|_|_|_|_|_|P|\n" +
-			"2|P|P|P|P|P|P|P|R|\n" +
-			"1|R|N|B|Q|K|B|N|_|\n" +
-			"  a b c d e f g h";
+				"8|r|n|b|q|k|b|n|r|\n" +
+				"7|p|p|p|p|p|p|_|_|\n" +
+				"6|_|_|_|_|_|_|p|p|\n" +
+				"5|_|_|_|_|_|_|_|_|\n" +
+				"4|_|_|_|_|_|_|_|_|\n" +
+				"3|_|_|_|_|_|_|_|P|\n" +
+				"2|P|P|P|P|P|P|P|R|\n" +
+				"1|R|N|B|Q|K|B|N|_|\n" +
+				"  a b c d e f g h";
 			check(input,output);
 		}
 		
@@ -324,15 +325,15 @@ import swen221.chessview.moves.Castling;
 					"";
 			
 			String output =
-			"8|r|n|b|q|k|b|n|r|\n" +
-			"7|_|p|p|p|p|p|p|p|\n" +
-			"6|_|_|_|_|_|_|_|_|\n" +
-			"5|_|_|_|_|_|_|_|_|\n" +
-			"4|p|_|_|_|_|_|_|_|\n" +
-			"3|_|_|_|_|P|_|_|_|\n" +
-			"2|P|P|P|P|K|P|P|P|\n" +
-			"1|R|N|B|_|Q|B|N|R|\n" +
-			"  a b c d e f g h";
+				"8|r|n|b|q|k|b|n|r|\n" +
+				"7|_|p|p|p|p|p|p|p|\n" +
+				"6|_|_|_|_|_|_|_|_|\n" +
+				"5|_|_|_|_|_|_|_|_|\n" +
+				"4|p|_|_|_|_|_|_|_|\n" +
+				"3|_|_|_|_|P|_|_|_|\n" +
+				"2|P|P|P|P|K|P|P|P|\n" +
+				"1|R|N|B|_|Q|B|N|R|\n" +
+				"  a b c d e f g h";
 			check(input,output);
 		}
 		
@@ -348,15 +349,15 @@ import swen221.chessview.moves.Castling;
 					"";
 			
 			String output =
-			"8|r|n|b|q|k|b|n|r|\n" +
-			"7|p|_|_|_|_|_|p|p|\n" +
-			"6|_|p|p|p|p|p|_|_|\n" +
-			"5|_|_|_|_|_|_|_|_|\n" +
-			"4|_|_|_|_|_|_|_|_|\n" +
-			"3|_|_|_|_|P|_|_|N|\n" +
-			"2|P|P|P|P|B|P|P|P|\n" +
-			"1|R|N|B|Q|K|_|_|R|\n" +
-			"  a b c d e f g h";
+				"8|r|n|b|q|k|b|n|r|\n" +
+				"7|p|_|_|_|_|_|p|p|\n" +
+				"6|_|p|p|p|p|p|_|_|\n" +
+				"5|_|_|_|_|_|_|_|_|\n" +
+				"4|_|_|_|_|_|_|_|_|\n" +
+				"3|_|_|_|_|P|_|_|N|\n" +
+				"2|P|P|P|P|B|P|P|P|\n" +
+				"1|R|N|B|Q|K|_|_|R|\n" +
+				"  a b c d e f g h";
 			check(input,output);
 		}
 		
@@ -372,19 +373,17 @@ import swen221.chessview.moves.Castling;
 					"";
 			
 			String output =
-			"8|_|n|b|q|k|b|n|r|\n" +
-			"7|_|p|p|p|p|p|p|p|\n" +
-			"6|_|_|_|_|_|_|_|_|\n" +
-			"5|_|_|_|_|_|_|_|_|\n" +
-			"4|r|_|_|_|_|_|_|_|\n" +
-			"3|p|_|_|_|_|_|P|N|\n" +
-			"2|P|P|P|P|P|P|B|P|\n" +
-			"1|R|N|B|Q|K|_|_|R|\n" +
-			"  a b c d e f g h";
+				"8|_|n|b|q|k|b|n|r|\n" +
+				"7|_|p|p|p|p|p|p|p|\n" +
+				"6|_|_|_|_|_|_|_|_|\n" +
+				"5|_|_|_|_|_|_|_|_|\n" +
+				"4|r|_|_|_|_|_|_|_|\n" +
+				"3|p|_|_|_|_|_|P|N|\n" +
+				"2|P|P|P|P|P|P|B|P|\n" +
+				"1|R|N|B|Q|K|_|_|R|\n" +
+				"  a b c d e f g h";
 			check(input,output);
 		}
-		
-		
 					
 				
 		// ================================================

@@ -1,17 +1,15 @@
-
 package swen221.piece.tests;
 
 import org.junit.Test;
 
-import swen221.move.tests.ChessViewTests;
+import swen221.tests.ChessViewTests;
 
 	public class ChessViewKingTests {
 
 		// ================================================
 		// Valid Tests
 		// ================================================
-
-		
+	
 		//King diagonal move
 		@Test public void king_valid_1() {
 			String input =
@@ -61,10 +59,6 @@ import swen221.move.tests.ChessViewTests;
 			check(input,output);
 		}
 				
-		
-			
-			
-
 		// ================================================
 		// Invalid Tests
 		// ================================================
