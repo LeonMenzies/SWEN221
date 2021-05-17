@@ -51,7 +51,7 @@ public class Player {
 	}
 
 	public Player clone() {
-		return new Player(this.direction, getHand().clone());
+		return new Player(getDirection(), getHand().clone());
 
 	}
 

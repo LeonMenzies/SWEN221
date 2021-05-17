@@ -58,7 +58,7 @@ public class Hand implements Cloneable, Iterable<Card> {
 			h.add(c.clone());
 		}
 
-		return new Hand().clone();
+		return h;
 	}
 
 	/**
@@ -89,5 +89,23 @@ public class Hand implements Cloneable, Iterable<Card> {
 	 */
 	public void clear() {
 		cards.clear();
+	}
+
+	/**
+	 * Return the first card if there is one
+	 */
+	public Card getFirst() {
+		if (cards.size() > 0) {
+			return cards.first();
+		} else {
+			return null;
+		}
+	}
+
+	/**
+	 * returns all the cards
+	 */
+	public Set<Card> getAll() {
+		return cards;
 	}
 }

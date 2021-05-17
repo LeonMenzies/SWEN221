@@ -62,14 +62,18 @@ public abstract class AbstractCardGame implements CardGame {
 
 	public AbstractCardGame(AbstractCardGame a) {
 
+		if (a.getTrick() != null) {
+			this.currentTrick = a.getTrick().clone();
+		}
+
+		this.trumps = a.trumps;
+
 		for (Player.Direction d : Player.Direction.values()) {
+
 			players.put(d, a.players.get(d).clone());
 			tricks.put(d, a.tricks.get(d));
 			scores.put(d, a.scores.get(d));
 		}
-
-		this.trumps = a.trumps;
-		this.currentTrick = a.currentTrick.clone();
 
 	}
 

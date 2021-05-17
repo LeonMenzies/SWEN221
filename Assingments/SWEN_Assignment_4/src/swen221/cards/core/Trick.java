@@ -2,6 +2,7 @@ package swen221.cards.core;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Represents a trick being played. This includes the cards that have been
@@ -10,7 +11,7 @@ import java.util.List;
  * @author David J. Pearce
  * 
  */
-public class Trick {
+public class Trick implements Cloneable {
 	private Card[] cards = new Card[4];
 	private Player.Direction lead;
 	private Card.Suit trumps;
@@ -35,8 +36,18 @@ public class Trick {
 		return lead;
 	}
 
+	/**
+	 * Clone the current trick
+	 * 
+	 * @return - the cloned trick
+	 */
 	public Trick clone() {
-		return new Trick(this.lead, this.trumps);
+
+		Trick clone = new Trick(this.lead, this.trumps);
+		for (int i = 0; i < this.cards.length; i++) {
+			clone.cards[i] = (this.cards[i] == null ? null : this.cards[i].clone());
+		}
+		return clone;
 	}
 
 	/**
@@ -133,8 +144,8 @@ public class Trick {
 	public void play(Player p, Card c) throws IllegalMove {
 
 		// Make sure the card is in the players hand
-		if (!p.hand.contains(c)) {
-			throw new IllegalMove("Card is not in hand");
+		if (!p.getHand().contains(c)) {
+			throw new IllegalMove("Card is not in hand: " + p.direction + " " + c.toString());
 		}
 
 		// Make sure it is the players turn
@@ -143,16 +154,12 @@ public class Trick {
 		}
 
 		// Make sure the card being played follows suite
-		if (!c.suit().equals(getTrumps())) {
-
-			for (Card c1 : p.getHand()) {
-				System.out.println(c1);
-				if (c1.suit().equals(getTrumps())) {
-					throw new IllegalMove("Wrong suit");
-				}
+		if (cards[0] != null) {
+			Set<Card> validCards = p.hand.matches(cards[0].suit());
+			if (!validCards.isEmpty() && c.suit() != cards[0].suit()) {
+				throw new IllegalMove("Must follow suit");
 			}
 		}
-		System.out.println("#############");
 
 		// Finally, play the card.
 		for (int i = 0; i != 4; ++i) {
