@@ -37,7 +37,7 @@ public class Trick implements Cloneable {
 	}
 
 	/**
-	 * Clone the current trick
+	 * Clone the current trick and its cards so far
 	 * 
 	 * @return - the cloned trick
 	 */

@@ -1,29 +1,26 @@
-//The answer must have balanced parentheses
-class ArrayUtil {
-	String opening = "[";
-	String closing = "]";
-	String separator = ", ";
+// The answer must have balanced parentheses
+class Pair<String, Integer> {
+	private S first;
+	private T second;
 
-	public final String format(Object[] array) {
-		String result = opening;
-		if (array.length == 0)
-			return result + closing;
-		for (int i = 0; i < array.length - 1; i++) {
-			result += array[i] + separator;
-		}
-		return result + array[array.length - 1] + closing;
+	public Pair(S first, T second) {
+		this.first = first;
+		this.second = second;
+	}
+
+	public S getFirst() {
+		return first;
+	}
+
+	public T getSecond() {
+		return second;
 	}
 }
 
 public class Exercise {
-	public static void main(String[] arg) {
-		ArrayUtil u = (new ArrayUtil() {
-			{
-				separator = "; ";
-			}
-		});
-		assert "[1; 2; 3]".equals(u.format(new Integer[] { 1, 2, 3 }));
-		assert "[4; 5; 6]".equals(u.format(new Integer[] { 4, 5, 6 }));
-		assert "[7; 8; 9]".equals(u.format(new Integer[] { 7, 8, 9 }));
+	public static void main(String[] args) {
+		Pair<String, Integer> p1 = new Pair<String, Integer>("Hello", 1);
+		assert p1.getFirst().equals("Hello");
+		assert p1.getSecond().equals(1);
 	}
 }
