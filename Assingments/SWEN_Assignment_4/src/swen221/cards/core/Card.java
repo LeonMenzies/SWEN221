@@ -96,48 +96,6 @@ public class Card implements Comparable<Card> {
 
 	}
 
-	// Third compare to for AI find lower
-	public int compareThree(Card o, Card.Suit trump, Card lead) {
-
-		// Check for null case
-		if (o == null) {
-			return 1;
-		}
-
-		// If this card is a trump
-		if (this.suit.equals(trump)) {
-			// If the other card is also a trump return the highest rank
-			if (o.suit.equals(trump)) {
-				return this.rank.compareTo(o.rank);
-			} else {
-				// Else return 1 cos trump always beats other cards
-				return 1;
-			}
-		}
-
-		// If the other card is a trump
-		if (o.suit.equals(trump)) {
-			// If the this card is also a trump return the highest rank
-			if (this.suit.equals(trump)) {
-				return o.rank.compareTo(this.rank);
-			} else {
-				// Else return 1 cos trump always beats other cards
-				return -1;
-			}
-		}
-
-		// If card doesn't follow lead its lower
-		if (lead != null) {
-			if (this.suit() == lead.suit() && o.suit() != lead.suit())
-				return -1;
-		}
-
-		// Otherwise compare the rank
-
-		return rank.compareTo(o.rank);
-
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;

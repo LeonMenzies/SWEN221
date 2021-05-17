@@ -2,12 +2,10 @@ package swen221.cards.util;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.Comparator;
+import java.util.TreeSet;
 
 import swen221.cards.core.Card;
-import swen221.cards.core.Hand;
 import swen221.cards.core.Player;
 import swen221.cards.core.Trick;
 
@@ -35,78 +33,77 @@ public class SimpleComputerPlayer extends AbstractComputerPlayer {
 			fail("Hand is empty");
 		}
 
-		// Useful fields
 		Card toReturn = null;
-		Hand hand = player.getHand();
-		List<Card> played = trick.getCardsPlayed();
 
-		Card.Suit trump = trick.getTrumps();
-		Card lead = trick.getCardPlayed(trick.getLeadPlayer());
+		// Collections
+		TreeSet<Card> allCards = new TreeSet<>(new CardComapre());
+		TreeSet<Card> leadCards = new TreeSet<>(new CardComapre());
+		TreeSet<Card> nonTrumpCards = new TreeSet<>(new CardComapre());
+		TreeSet<Card> trumpCards = new TreeSet<>(new CardComapre());
+		TreeSet<Card> tableaCards = new TreeSet<>(new CardComapre());
 
-		Set<Card> leadCards = new HashSet<>();
-
-		// Get the winning played card
-		Card winningCard = null;
-		for (Card c2 : played) {
-			if (c2.compareTwo(winningCard) > 0) {
-				winningCard = c2;
+		for (Card c : player.getHand().getAll()) {
+			// Add each card
+			allCards.add(c);
+			// add matching to lead
+			Card check = trick.getCardPlayed(trick.getLeadPlayer());
+			if (check != null && c.suit() == check.suit()) {
+				leadCards.add(c);
 			}
-
+			if (c.suit() != trick.getTrumps()) {
+				nonTrumpCards.add(c);
+			}
+			// Add matching to trump
+			if (c.suit() == trick.getTrumps()) {
+				trumpCards.add(c);
+			}
 		}
-//
-//		// No cards played, play best card
-//		if (played.size() == 0) {
-//
-//			for (Card toCheck : hand.getAll()) {
-//				if (toCheck.compareTwo(toReturn, trump, lead) >= 0) {
-//					toReturn = toCheck;
-//				}
-//			}
-//
-//			return toReturn;
-//
-//			// Play minimum card to win
-//		} else if (played.size() == 3) {
-//
-//			Card bestPlay = null;
-//
-//			for (Card c3 : hand.getAll()) {
-//				if (c3.compareTwo(winningCard, trump, lead) > 0) {
-//
-//					if (bestPlay == null) {
-//						bestPlay = c3;
-//					} else {
-//						if (c3.compareTwo(bestPlay, trump, lead) < 0) {
-//							bestPlay = c3;
-//						}
-//					}
-//				}
-//			}
-//
-//			return bestPlay;
-//			// Iterate the played cards and and play best one to beat everyone
-//			// If not possible get rid of worst card
-//		} else {
-//
-//			Card bestPlay = null;
-//
-//			for (Card toCheck : hand.getAll()) {
-//				if (toCheck.compareTwo(bestPlay, trump, lead) >= 0) {
-//					bestPlay = toCheck;
-//				}
-//			}
-//
-//			if (bestPlay.compareTwo(winningCard, trump, lead) >= 0) {
-//				return bestPlay;
-//			} else {
-//				Card lowestCard = bestPlay;
-//				for (Card toCheck : hand.getAll()) {
-//					if (toCheck.compareThree(lowestCard, trump, lead) <= 0) {
-//						lowestCard = toCheck;
-//					}
-//				}
-//				return lowestCard;
-//			}
-//		}
+
+		// Order the table to find the highest
+		for (Card c : trick.getCardsPlayed()) {
+			tableaCards.add(c);
+		}
+
+		// Play best card
+		if (trick.getCardsPlayed().isEmpty()) {
+			if (trick.getTrumps() != null && trumpCards.isEmpty() == false) {
+				toReturn = trumpCards.last();
+			} else {
+				toReturn = allCards.last();
+			}
+			// Play lowest card to win
+		} else if (trick.getCardsPlayed().size() == 3) {
+			for (Card c : allCards) {
+				if (c.compareTwo(tableaCards.last()) > 0) {
+					toReturn = c;
+					break;
+				}
+			}
+			// Throw worst card
+		} else {
+			if (nonTrumpCards.isEmpty()) {
+				toReturn = allCards.first();
+			} else {
+				toReturn = nonTrumpCards.first();
+			}
+		}
+
+		return toReturn;
+
+	}
+}
+
+//Comparator class
+class CardComapre implements Comparator<Card> {
+
+	@Override
+	public int compare(Card c1, Card c2) {
+		int v = c1.rank().compareTo(c2.rank());
+
+		if (v == 0) {
+			return c1.suit().compareTo(c2.suit());
+		} else {
+			return v;
+		}
 	}
 }
