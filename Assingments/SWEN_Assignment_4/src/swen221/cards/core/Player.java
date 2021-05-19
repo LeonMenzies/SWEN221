@@ -50,6 +50,9 @@ public class Player {
 		this.hand = h;
 	}
 
+	/**
+	 * Return a new player with the same direction and a clone of the current hand
+	 */
 	public Player clone() {
 		return new Player(getDirection(), getHand().clone());
 

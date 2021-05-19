@@ -60,16 +60,23 @@ public abstract class AbstractCardGame implements CardGame {
 		}
 	}
 
+	/**
+	 * @param a - AbstractCardGame to be cloned
+	 * 
+	 *          This Method Takes an AbstractCardGame and clones each component of
+	 *          it using a deep clone
+	 */
 	public AbstractCardGame(AbstractCardGame a) {
 
+		// Only set the trick if it is not null
 		if (a.getTrick() != null) {
 			this.currentTrick = a.getTrick().clone();
 		}
 
 		this.trumps = a.trumps;
 
+		// Clone each players information
 		for (Player.Direction d : Player.Direction.values()) {
-
 			players.put(d, a.players.get(d).clone());
 			tricks.put(d, a.tricks.get(d));
 			scores.put(d, a.scores.get(d));
@@ -85,6 +92,9 @@ public abstract class AbstractCardGame implements CardGame {
 	// Methods required for Clone-able
 	// ========================================================
 
+	/**
+	 * Abstract cloning method
+	 */
 	public abstract CardGame clone();
 
 	// ========================================================

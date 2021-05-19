@@ -41,7 +41,7 @@ public class Card implements Comparable<Card> {
 	}
 
 	/**
-	 * Create a clone of the current card
+	 * Create a clone of the current card using the current suite and rank
 	 */
 	public Card clone() {
 		return new Card(suit(), rank());
@@ -84,7 +84,12 @@ public class Card implements Comparable<Card> {
 		}
 	}
 
-	// Second compare to for AI find higher rank then suit
+	/**
+	 * @param o - Card to be compared to this
+	 * @return the value of the comparison
+	 * 
+	 *         Second compare to for AI find higher rank then suit
+	 */
 	public int compareTwo(Card o) {
 		int v = rank.compareTo(o.rank);
 
@@ -96,6 +101,9 @@ public class Card implements Comparable<Card> {
 
 	}
 
+	/**
+	 * Stand Java hashCode method
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -105,6 +113,9 @@ public class Card implements Comparable<Card> {
 		return result;
 	}
 
+	/**
+	 * Standard Java equals method
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

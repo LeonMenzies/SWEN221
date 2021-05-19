@@ -49,7 +49,7 @@ public class Hand implements Cloneable, Iterable<Card> {
 	}
 
 	/**
-	 * Clone the current hand and its cards
+	 * Clone the current hand and each of its cards
 	 */
 	public Hand clone() {
 		Hand h = new Hand();
